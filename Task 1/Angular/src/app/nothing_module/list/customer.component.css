@@ -1,0 +1,62 @@
+.header-panel {
+  background-color: #046056;
+  height: 80px;
+  width: 100%;
+}
+
+.greenButton {
+  background-color: #046056;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: unset;
+  height: 35px;
+}
+
+.redButton {
+  background-color: #ff0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: unset;
+  height: 35px;
+}
+
+.greyButton {
+  background-color: #555555;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: unset;
+  height: 35px;
+}
+
+.titles {
+  background-color: #046056;
+  height: 60px;
+  line-height: 60px;
+  color: white;
+  font-family: 'Arial Black', serif;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.bodyAll {
+  width: 90%;
+  border-radius: 10px;
+  background-color: white;
+  margin: 90px auto;
+  padding: 10px;
+}
+
+.tableTitle {
+  background-color: #046056;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #046056;
+  border-radius: 5px;
+}

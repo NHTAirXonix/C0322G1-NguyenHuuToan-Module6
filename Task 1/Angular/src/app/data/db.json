@@ -1,0 +1,36 @@
+{
+  "cardMedical": [
+    {
+      "id": 1,
+      "name": "BA-001"
+    },
+    {
+      "id": 2,
+      "name": "BA-112"
+    },
+    {
+      "id": 3,
+      "name": "BA-223"
+    },
+    {
+      "id": 4,
+      "name": "BA-444"
+    }
+  ],
+  "people": [
+    {
+      "id": 3,
+      "code": "BN-984",
+      "name": "Ton Nu D",
+      "dayStart": "2022-10-10",
+      "dayEnd": "2022-10-13",
+      "reason": "Covid",
+      "resovers": "Cach ly",
+      "doctor": "Le Van B",
+      "cardMedical": {
+        "id": 3,
+        "name": "BA-223"
+      }
+    }
+  ]
+}
