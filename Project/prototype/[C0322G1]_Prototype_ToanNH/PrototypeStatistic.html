@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap520/css/bootstrap.min.css">
+    <script src="bootstrap520/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="PrototypeStatistic.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body style="margin: 0; padding: 0;background-image: url('thumb-1920-235985.jpg');background-repeat: no-repeat; background-size: 100% 100%;background-attachment: fixed;">
+
+<div style="height: 100vh; width: 100%;padding: 10vh">
+    <div style="width: 50%; margin: auto;background-color: white;border-radius: 10px;padding: 10px;">
+        <h1 class="titles">THỐNG KÊ</h1>
+        <br>
+        <div class="row">
+            <div class="col-4"><label class="form-label ">Bắt đầu từ ngày</label></div>
+            <div class="col-4"><input class="form-control" type="date"></div>
+            <div class="col-4"><input class="form-control" type="date"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4"><label class="form-label ">Đơn vị thời gian</label></div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Theo Năm</div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Theo Tháng</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4"><label class="form-label ">Loại sản phẩm</label></div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Lợn Giống</div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Lợn Thịt</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4"><p class="form-label ">Công Ty Mua</p></div>
+            <div class="col-4">
+                <select class="form-select">
+                    <option value="">Công Ty A</option>
+                    <option value="">Công Ty B</option>
+                    <option value="">Công Ty C</option>
+                    <option value="">Công Ty D</option>
+                    <option value="">Công Ty E</option>
+                </select>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4"><label class="form-label ">Loại biểu đồ</label></div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Biểu đồ Cột</div>
+            <div class="col-4"><input name="a" class="form-check-input" type="radio">Biểu đồ Tròn</div>
+        </div>
+        <br>
+        <div class="position-relative">
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Phân Tích</button>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content"; style="width: 100%; position: absolute;float: left;left: 50%;top: 50%; transform: translate(-50%, 15%);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">THÔNG TIN THỐNG KÊ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <canvas id="myChart" style="width:100%;"></canvas>
+                            <table>
+                                <tr>
+                                    <th>Công ty 1</th>
+                                    <th><div style="background-color: #046056; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                                <tr>
+                                    <th>Công ty 2</th>
+                                    <th><div style="background-color: red; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                                <tr>
+                                    <th>Công ty 3</th>
+                                    <th><div style="background-color: blue; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                                <tr>
+                                    <th>Công ty 4</th>
+                                    <th><div style="background-color: orange; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                                <tr>
+                                    <th>Công ty 5</th>
+                                    <th><div style="background-color: yellow; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                                <tr>
+                                    <th>Doanh thu</th>
+                                    <th><div style="background-color: gray; height: 1rem;width: 1rem"></div></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <h3 style="width: 100%; text-align: center">Bảng thông tin</h3>
+                            <div style="overflow-y: auto; height: 500px">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr style="background-color: #198754; color: white">
+                                            <th>Tháng</th><th>Công Ty</th><th>Số Lượng</th><th>Doanh Thu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1</td><td>Công Ty 1</td><td>55</td><td>22</td></tr>
+                                        <tr><td>1</td><td>Công Ty 2</td><td>11</td><td>55</td></tr>
+                                        <tr><td>1</td><td>Công Ty 3</td><td>38</td><td>57</td></tr>
+                                        <tr><td>1</td><td>Công Ty 4</td><td>11</td><td>55</td></tr>
+                                        <tr><td>1</td><td>Công Ty 5</td><td>11</td><td>55</td></tr>
+
+                                        <tr><td>2</td><td>Công Ty 1</td><td>55</td><td>22</td></tr>
+                                        <tr><td>2</td><td>Công Ty 2</td><td>11</td><td>55</td></tr>
+                                        <tr><td>2</td><td>Công Ty 3</td><td>38</td><td>57</td></tr>
+                                        <tr><td>2</td><td>Công Ty 4</td><td>11</td><td>55</td></tr>
+                                        <tr><td>2</td><td>Công Ty 5</td><td>11</td><td>55</td></tr>
+
+                                        <tr><td>3</td><td>Công Ty 1</td><td>55</td><td>22</td></tr>
+                                        <tr><td>3</td><td>Công Ty 2</td><td>11</td><td>55</td></tr>
+                                        <tr><td>3</td><td>Công Ty 3</td><td>38</td><td>57</td></tr>
+                                        <tr><td>3</td><td>Công Ty 4</td><td>11</td><td>55</td></tr>
+                                        <tr><td>3</td><td>Công Ty 5</td><td>11</td><td>55</td></tr>
+
+                                        <tr><td>4</td><td>Công Ty 1</td><td>55</td><td>22</td></tr>
+                                        <tr><td>4</td><td>Công Ty 2</td><td>11</td><td>55</td></tr>
+                                        <tr><td>4</td><td>Công Ty 3</td><td>38</td><td>57</td></tr>
+                                        <tr><td>4</td><td>Công Ty 4</td><td>11</td><td>55</td></tr>
+                                        <tr><td>4</td><td>Công Ty 5</td><td>11</td><td>55</td></tr>
+
+                                        <tr><td>5</td><td>Công Ty 1</td><td>55</td><td>22</td></tr>
+                                        <tr><td>5</td><td>Công Ty 2</td><td>11</td><td>55</td></tr>
+                                        <tr><td>5</td><td>Công Ty 3</td><td>38</td><td>57</td></tr>
+                                        <tr><td>5</td><td>Công Ty 4</td><td>11</td><td>55</td></tr>
+                                        <tr><td>5</td><td>Công Ty 5</td><td>11</td><td>55</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-success">Xuất Dữ Liệu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var xValues = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"];
+    var amount1 = [55, 49, 44, 24, 15];
+    var total1 = [25, 33, 20, 60, 50];
+    var amount2 = [44, 22, 33, 44, 55];
+    var total2 = [55, 44, 33, 22, 66];
+    var amount3 = [38, 28, 18, 48, 98];
+    var total3 = [57, 47, 37, 87, 17];
+    var amount4 = [33, 22, 33, 44, 55];
+    var total4 = [55, 44, 33, 22, 22];
+    var amount5 = [77, 22, 33, 44, 55];
+    var total5 = [55, 44, 33, 22, 33];
+    var barColors1 = ["#046056", "#046056", "#046056", "#046056", "#046056"];
+    var barColors2 = ["red", "red", "red", "red", "red"];
+    var barColors3 = ["blue", "blue", "blue", "blue", "blue"];
+    var barColors4 = ["orange", "orange", "orange", "orange", "orange"];
+    var barColors5 = ["yellow", "yellow", "yellow", "yellow", "yellow"];
+    var totalColor = ["#5b6565", "#5b6565", "#5b6565", "#5b6565", "#5b6565"];
+    new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [
+                {backgroundColor: barColors1, data: amount1},
+                {backgroundColor: totalColor, data: total1},
+                {backgroundColor: barColors2, data: amount2},
+                {backgroundColor: totalColor, data: total2},
+                {backgroundColor: barColors3, data: amount3},
+                {backgroundColor: totalColor, data: total3},
+                {backgroundColor: barColors4, data: amount4},
+                {backgroundColor: totalColor, data: total4},
+                {backgroundColor: barColors5, data: amount5},
+                {backgroundColor: totalColor, data: total5},
+            ]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+                display: true,
+                text: "Biểu đồ"
+            }
+        }
+    });
+</script>
+</body>
+
+
+</html>

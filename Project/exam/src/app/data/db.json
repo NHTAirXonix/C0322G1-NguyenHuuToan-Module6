@@ -1,0 +1,64 @@
+{
+  "cardMedical": [
+    {
+      "id": 1,
+      "code": "BA-001"
+    },
+    {
+      "id": 2,
+      "code": "BA-112"
+    },
+    {
+      "id": 3,
+      "code": "BA-223"
+    },
+    {
+      "id": 4,
+      "code": "BA-444"
+    }
+  ],
+  "people": [
+    {
+      "id": 1,
+      "code": "BN-984",
+      "name": "Ton Nu Dddd",
+      "dayStart": "2022-10-10",
+      "dayEnd": "2022-10-19",
+      "reason": "Covid",
+      "resovers": "Cach ly",
+      "doctor": "Le Van B",
+      "card": {
+        "id": 3,
+        "name": "BA-223"
+      }
+    },
+    {
+      "id": 2,
+      "code": "BN-984",
+      "name": "Ton Nu Dddd",
+      "dayStart": "2022-10-10",
+      "dayEnd": "2022-10-13",
+      "reason": "Covid",
+      "resovers": "Cach ly",
+      "doctor": "Le Van B",
+      "card": {
+        "id": 3,
+        "name": "BA-223"
+      }
+    },
+    {
+      "id": 3,
+      "code": "BN-984",
+      "name": "Ton Nu Dddd",
+      "dayStart": "2022-10-10",
+      "dayEnd": "2022-10-30",
+      "reason": "Covid",
+      "resovers": "Cach ly",
+      "doctor": "Le Van B",
+      "card": {
+        "id": 3,
+        "name": "BA-223"
+      }
+    }
+  ]
+}

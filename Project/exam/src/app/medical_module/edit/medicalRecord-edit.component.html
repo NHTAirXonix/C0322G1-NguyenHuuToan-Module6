@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+<body style="margin: 0; padding: 0;background-image: radial-gradient(#0c5460,#e0e0e0);">
+
+<div style="min-height:70vh;padding: 15px 50px 15px 50px">
+  <form (ngSubmit)="updateProduct(id)" [formGroup]="formEdit"
+        style="width: 50%; margin: auto; margin-top: 100px;margin-bottom: 100px; background-color: white;padding: 20px;border-radius: 10px">
+
+    <h1
+      style="text-align: center;border-radius: 5px; background-color: #046056;color: white;font-family: 'Arial Black',serif;">
+      EDIT MEDICAL RECORD</h1><br>
+
+    <div class="row">
+
+
+      <div hidden class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">ID</p>
+        </div>
+        <input type="number" class="form-control" placeholder="Customer Id" formControlName="medicalId">
+      </div>
+
+      <div class="col-12">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">MedicalRecord Code</p>
+        </div>
+        <input disabled type="text" class="form-control" formControlName="medicalCode">
+      </div>
+
+      <div class="row" formGroupName="patient" >
+        <div class="col-4">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="margin-top: 13px;margin-bottom: 3px">Patient Id</p>
+          </div>
+          <input disabled type="text" class="form-control" formControlName="patientId">
+        </div>
+
+        <div class="col-4">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="margin-top: 13px;margin-bottom: 3px">Patient Code</p>
+          </div>
+          <input disabled type="text" class="form-control" formControlName="patientCode">
+        </div>
+
+        <div class="col-4">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="margin-top: 13px;margin-bottom: 3px">Patient Name</p>
+          </div>
+          <input type="text" class="form-control" formControlName="patientName">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">Day Start</p>
+        </div>
+        <input type="date" class="form-control" placeholder="Day Start" formControlName="dayStart">
+      </div>
+
+      <div class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">Day End</p>
+          <p style="margin-top: 13px;margin-bottom: 3px;color: red"
+             *ngIf="formEdit.hasError('daynomatch') && formEdit.touched">{{ formEdit.errors.message }}</p>
+        </div>
+        <input type="date" class="form-control" placeholder="Day End" formControlName="dayEnd">
+      </div>
+
+      <div class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">Reason</p>
+          <p style="margin-top: 13px;margin-bottom: 3px;color: red"
+             *ngIf="formEdit.get('reason').invalid && formEdit.get('reason').touched">{{ formEdit.get('reason').errors.message }}</p>
+        </div>
+        <input type="text" class="form-control" placeholder="Customer Id Patient Number" formControlName="reason">
+      </div>
+
+      <div class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">Resolver</p>
+          <p style="margin-top: 13px;margin-bottom: 3px;color: red"
+             *ngIf="formEdit.get('resolve').invalid && formEdit.get('resolve').touched">{{ formEdit.get('resolve').errors.message }}</p>
+        </div>
+        <input type="text" class="form-control" placeholder="Customer Id Patient Number" formControlName="resolve">
+      </div>
+
+      <div class="col-6">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-top: 13px;margin-bottom: 3px">Doctor</p>
+          <p style="margin-top: 13px;margin-bottom: 3px;color: red"
+             *ngIf="formEdit.get('doctor').invalid && formEdit.get('doctor').touched">{{ formEdit.get('doctor').errors.message }}</p>
+        </div>
+        <input type="text" class="form-control" placeholder="Customer Id Patient Number" formControlName="doctor">
+      </div>
+
+    </div>
+    <br>
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2" role="group" aria-label="First group">
+        <button [disabled]="formEdit.invalid" class="btn btn-success" type="submit" style="background-color: #046056">
+          Save
+        </button>
+      </div>
+      <div class="btn-group me-2" role="group" aria-label="Second group">
+        <button class="btn btn-secondary"><a style="color: #ffffff;text-decoration: none;" routerLink="/component/list">Back
+          to Medical list</a></button>
+      </div>
+    </div>
+  </form>
+
+</div>
+</body>
+<code>{{ formEdit.value|json}}</code>
+</html>
+
