@@ -1,0 +1,72 @@
+<body>
+<div class="container-fluid">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-6 formRow_create" [formGroup]="storageForm" (ngSubmit)="submit()">
+        <div class="mb-3 formRow_create_title">
+          <h5 style="font-size: 25px"> THÊM VÀO KHO</h5>
+        </div>
+        <hr>
+        <div class="formRow_create_content">
+          <div class="mb-3">
+            <label class="form-label">Loại Thức Ăn <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="foodType">
+            <p style="color:red"
+               *ngIf="storageForm.controls.foodType.hasError('required') && storageForm.controls.foodType.touched">
+              Vui lòng nhập thông tin.</p>
+            <p style="color:red"
+               *ngIf="storageForm.controls.foodType.hasError('maxlength') && storageForm.controls.foodType.touched">
+              Loại thức ăn không được nhập quá 30 ký tự.</p>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-md">
+                <label class="form-label">Số Lượng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" formControlName="amount"
+                       onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'">
+                <p style="color:red"
+                   *ngIf="storageForm.controls.amount.hasError('required') && storageForm.controls.amount.touched">
+                  Vui lòng nhập thông tin.</p>
+                <p style="color:red"
+                   *ngIf="storageForm.controls.amount.hasError('min') && storageForm.controls.amount.touched">
+                  Số lượng phải > 0.</p>
+                <p style="color:red"
+                   *ngIf="storageForm.controls.amount.hasError('max') && storageForm.controls.amount.touched">
+                  Số lượng không quá 10 chữ số.</p>
+                <p style="color:red"
+                   *ngIf="storageForm.controls.amount.hasError('pattern') && storageForm.controls.amount.touched">
+                  Vui lòng nhập số.</p>
+              </div>
+              <div class="col-md">
+                <label class="form-label">Đơn Vị <span class="text-danger">*</span> </label>
+                <select class="form-control" formControlName="unit">
+                  <option value="" disabled >Vui lòng chọn</option>
+                  <option value="Kg">Kg</option>
+                  <option value="Tấn">Tấn</option>
+                </select>
+                <p style="color:red"
+                   *ngIf="storageForm.controls.unit.hasError('required') && storageForm.controls.unit.touched">
+                  Vui lòng chọn thông tin.</p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ngày Nhập</label>
+            <input type="date" id="myText" class="form-control" formControlName="date" [value]="this.today" >
+            <p style="color:red"
+               *ngIf="storageForm.controls.date.hasError('dateNotExist') && storageForm.controls.date.touched">
+              Ngày nhập không tồn tại.</p>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+            <button class="btn btn-outline-danger" routerLink="/storage/page" > Quay Lại</button>
+            <button class="btn btn-outline-success" type="submit" [disabled]="!storageForm.valid" > Thêm Mới</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="reset()" > Nhập Lại</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>
+</body>

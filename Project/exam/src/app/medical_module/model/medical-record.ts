@@ -9,5 +9,6 @@ export interface MedicalRecord {
   resolve?: string;
   doctor?: string;
   deleteStatus?: boolean;
+  money?: number;
   patient?: Patient;
 }

@@ -1,0 +1,72 @@
+<div class="row" style="padding: 0;margin: 0;background-color: #333; min-height: 80vh">
+
+  <div class="col-1"></div>
+
+  <div class="col-3" style="padding: 20px">
+    <div style="background-color: white;border-radius: 10px;padding: 20px">
+      <img src="{{ book.bookUrlImage }}" class="card-img-top" style="border-radius: 9px;border:1px solid black;">
+    </div>
+  </div>
+
+  <div class="col-7" style="padding: 20px">
+    <div style="background-color: white;border-radius: 10px;padding: 20px;height: 613px">
+      <h1 style="text-align: center;color: orange"><b>{{ book.bookCode | uppercase}}</b></h1>
+      <hr style="height:5px;border-width:0;color: #333;background-color: #333;opacity: 75%;border-radius: 5px">
+      <div class="row">
+        <div class="col-6">
+          <ul style="font-size: 20px">
+            <li><p><b>Mã sản phẩm: </b>{{ book.id}}</p></li>
+            <li><p><b>Tác giả: </b>{{ book.bookWriter}}</p></li>
+            <li><p><b>Dịch giả: </b>{{ book.bookTranslater}}</p></li>
+            <li><p><b>Nhà xuất bản: </b>{{ book.bookCompany}}</p></li>
+            <li><p><b>Ngày phát hành: </b>{{ book.bookDayOut | date}}</p></li>
+            <li><p><b>Số trang: </b>{{ book.bookPageNumber}}</p></li>
+            <li><p><b>Kích thước: </b>{{ book.bookSize}}</p></li>
+          </ul>
+        </div>
+
+        <div class="col-6">
+          <p style="background-color: orange;border-radius: 10px;color: black; text-align: center; font-size: 30px;border:1px solid black">Giá sản phẩm: {{ price | number}} Đồng <br> (Đã có VAT) </p>
+          <div class="row">
+
+            <div class="col-3">
+              <div class="row">
+                <div class="col-12"><button (click)="increase()" style="height: 50px;width: 50px;border-radius: 5px;background-color: orange"><i style="font-size: 30px;line-height: 30px;text-align: center" class="bi bi-caret-up-square"></i></button></div>
+                <div class="col-12">--------</div>
+                <div class="col-12"><input readonly style="height: 50px;width: 50px;border-radius: 5px;text-align: center" type="text" [(ngModel)]="amount"></div>
+                <div class="col-12">--------</div>
+                <div class="col-12"><button (click)="decrease()" style="height: 50px;width: 50px;border-radius: 5px;background-color: orange"><i style="font-size: 30px;line-height: 30px;text-align: center" class="bi bi-caret-down-square"></i></button></div>
+              </div>
+            </div>
+
+            <div class="col-9">
+              <div class="row">
+                <div class="col-12"><button style="font-size: 20px;border:1px solid black;border-radius: 5px;background-color: orange;color: black; height: 50px; width: 100%" (click)="addToCart()">Thêm vào giỏ hàng</button></div>
+                <div class="col-12">----------------------------------------------------------</div>
+                <div class="col-12"><button style="font-size: 20px;border:1px solid black;border-radius: 5px;background-color: #a80000;color: black; height: 50px; width: 100%" (click)="addAndGoToCart()">Mua ngay</button></div>
+                <div class="col-12">----------------------------------------------------------</div>
+                <div class="col-12"><p style="font-size: 20px;border:1px solid black;border-radius: 5px;background-color: orange;color: black; height: 50px; width: 100%; text-align: center;line-height: 50px">Tổng tiền: {{ price * amount | number}} Đồng </p></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-1"></div>
+
+  <div class="col-1"></div>
+
+  <div class="col-10" style="padding: 20px">
+    <div style="background-color: white;border-radius: 10px;padding: 20px">
+      <h1 style="text-align: center;color: orange"><b> Giới thiệu sách</b></h1>
+      <p>{{ book.content }}</p>
+    </div>
+  </div>
+
+  <div class="col-1"></div>
+</div>

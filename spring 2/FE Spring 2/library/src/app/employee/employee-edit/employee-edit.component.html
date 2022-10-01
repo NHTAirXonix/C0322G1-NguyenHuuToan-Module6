@@ -1,0 +1,116 @@
+<div class="body">
+  <div class="container py-5 my-3">
+    <div class="row formRow">
+      <div class="col-lg-3"></div>
+      <form class="col-lg-6 formRow_create" [formGroup]="employeeForm">
+        <div class="mb-3 text-center formRow_create_title">
+          <h2><b>CHỈNH SỬA NHÂN VIÊN</b></h2>
+        </div>
+        <hr>
+        <div class="formRow_create_content mx-4">
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Mã Nhân Viên <span><i>*</i></span></label>
+                <input type="text" class="form-control" disabled formControlName="code">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Họ Và Tên <span><i>*</i></span></label>
+                <input type="text" class="form-control" formControlName="name">
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.name.hasError('required') && employeeForm.controls.name.touched">
+                  Tên nhân viên không được để trống.
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.name.hasError('pattern') && employeeForm.controls.name.touched">
+                  Tên nhân viên phải viết hoa chữ cái đầu.
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.name.hasError('maxlength') && employeeForm.controls.name.touched">
+                  Tên nhân viên không được quá 30 kí tự.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Số CMND <span><i>*</i></span></label>
+                <input type="text" class="form-control" formControlName="idCard"
+                       (change)="checkIdCard($event.target.value)">
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.idCard.hasError('required') && employeeForm.controls.idCard.touched">
+                  Số CMND không được để trống.
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.idCard.hasError('pattern') && employeeForm.controls.idCard.touched">
+                  Số CMND phải đúng định dạng 12 chữ số.
+                </div>
+                <div class="form-text" *ngIf="isExitsIdCard == true">Số CMND đã tồn tại. Vui lòng nhập lại.</div>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Ngày Sinh <span><i>*</i></span></label>
+                <input type="date" class="form-control" formControlName="birthDay">
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.birthDay.hasError('required') && employeeForm.controls.birthDay.touched">
+                  Ngày sinh không được để trống.
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.birthDay.hasError('checkAge') && employeeForm.controls.birthDay.touched">
+                  Tuổi phải trên 18 và dưới 55 tuổi.
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.birthDay.hasError('checkDay') && employeeForm.controls.birthDay.touched">
+                  Ngày sinh không được lớn hơn ngày hiện tại.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">Giới Tính <span><i>*</i></span></label>
+                <div class="form-check form-check-inline mx-5">
+                  <input class="form-check-input" type="radio" value="Nam" formControlName="gender"> Nam
+                </div>
+                <div class="form-check form-check-inline mx-5">
+                  <input class="form-check-input" type="radio" value="Nữ" formControlName="gender"> Nữ
+                </div>
+                <div class="form-check form-check-inline mx-5">
+                  <input class="form-check-input" type="radio" value="Khác" formControlName="gender"> Khác
+                </div>
+                <div class="form-text"
+                     *ngIf="employeeForm.controls.gender.hasError('required') && employeeForm.controls.gender.touched">
+                  Giới tính không được để trống.
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <label class="form-label">Chọn Ảnh <span><i>*</i></span></label>
+                <input type="file" class="form-control" (change)="selectFile($event); onFileSelected($event)">
+                <img class="mt-2" *ngIf="!editImageState" [src]="employeeForm.get('image').value" width="100%"
+                     height="auto">
+                <img class="form-control mt-2" [src]="url" *ngIf="editImageState" width="100%" height="auto">
+                <!--              <div class="form-text" *ngIf="employeeForm.controls.image.hasError('required') && employeeForm.controls.image.touched">Ảnh KHÔNG được để trống !!</div>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="d-md-flex justify-content-lg-around">
+            <a routerLink="/employee" class="btn btn-outline-danger"> Quay lại </a>
+            <button type="submit" class="btn btn-outline-success" *ngIf="loader" (click)="editEmployee()"
+                    [disabled]="!employeeForm.valid"> Cập nhật
+            </button>
+            <button *ngIf="!loader" class="btn btn-outline-success disabled">
+              <div class="spinner-border spinner-border-sm me-1"></div>
+              Đang tải ...
+            </button>
+            <button type="reset" class="btn btn-outline-secondary" (click)="reset(id)"> Nhập lại</button>
+          </div>
+        </div>
+      </form>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div>
+  <button class="modal-buton btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Liên hệ</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" style="margin: auto">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none">
+        <button (click)="changSuccess()" id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <H2 style="text-align: center">LIÊN HỆ</H2>
+        <div class="row mb-3">
+          <h6>Chúng tôi có thể giúp gì cho bạn ?</h6>
+        </div>
+        <form [formGroup]="contactForm" (ngSubmit)="save()">
+          <div class="row">
+            <div class="col-6"><input type="text" formControlName="name" class="form-control" placeholder="Tên bạn">
+              <span class="erorr"
+                    *ngIf="contactForm.get('name').hasError('required') && (contactForm.get('name').touched || submit)">Vui lòng nhập.</span>
+            </div>
+            <div class="col-6"><input type="text" formControlName="email" class="form-control" placeholder="Email">
+              <span class="erorr"
+                    *ngIf="contactForm.get('email').hasError('required') && (contactForm.get('email').touched || submit)">Vui lòng nhập.</span>
+              <span class="erorr"
+                    *ngIf="contactForm.get('email').hasError('pattern') && (contactForm.get('email').touched || submit)">Vui lòng nhập email hợp lệ (VD:a@gmail.com).</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 "><input type="text" formControlName="phone" class="form-control"
+                                       placeholder="Số điện thoại">
+              <span class="erorr"
+                    *ngIf="contactForm.get('phone').hasError('required') && (contactForm.get('phone').touched || submit)">Vui lòng nhập.</span>
+              <span class="erorr"
+                    *ngIf="contactForm.get('phone').hasError('pattern') && (contactForm.get('phone').touched || submit)">Vui lòng nhập Số điện thoại không (VD:09XXXXXXXX).</span>
+            </div>
+            <div class="col-6 "><input type="text" formControlName="address" class="form-control" placeholder="Địa chỉ">
+              <span class="erorr"
+                    *ngIf="contactForm.get('address').hasError('required') && (contactForm.get('address').touched || submit)">Vui lòng nhập.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12"><textarea type="text" formControlName="content" class="form-control"
+                                          contenteditable="true"
+                                          placeholder="Nội dung tin nhắn"></textarea>
+              <span class="erorr"
+                    *ngIf="contactForm.get('content').hasError('required') && (contactForm.get('content').touched || submit)">Vui lòng nhập.</span>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center me-5">
+            <div class="col-1">
+              <button type="submit">GỬI</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-success" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" style="margin: auto">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none">
+        <button (click)="changSuccess()" type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <H2 style="text-align: center">LIÊN HỆ</H2>
+        <div class="row mb-3">
+          <h6>Chúng tôi có thể giúp gì cho bạn ?</h6>
+        </div>
+        <div style="width: 100%;height: 310px;border: solid 1px black;border-radius: 5px"
+             class="d-flex justify-content-center success-content">
+          <p style="padding-top: 20px;text-align: center">
+            Cám ơn bạn đã liên hệ với chúng tôi. Thông điệp của bạn đã được gửi đi, chúng tôi sẽ sớm phản hồi lại cho
+            bạn.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="button-modal-success" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-success" style="display: none">
+</button>

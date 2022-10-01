@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "Content-Type",
+      "type": "java.lang.String",
+      "description": "Description for Content-Type."
+    }
+  ] }

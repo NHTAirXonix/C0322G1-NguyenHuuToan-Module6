@@ -1,0 +1,76 @@
+<div class="background" style="padding-bottom: 100px">
+  <div class="container-fluid">
+    <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+    <div class="container">
+      <div class="row formRow">
+        <form [formGroup]="getFormEdit" (ngSubmit)="editPigsty()" class="col-lg-6 formRow_create">
+          <div class="mb-3 formRow_create_title">
+            <h5 class="hgu"><b>CHỈNH SỬA CHUỒNG NUÔI</b></h5>
+          </div>
+          <hr class="hrLine">
+          <div class="formRow_create_content">
+            <div class="mb-3">
+              <label for="pigstyCode">Mã chuồng nuôi <span style="color: red">*</span></label>
+              <input disabled value="{{pigsty.code}}" type="text" id="pigstyCode" class="form-control"
+                     placeholder="Nhập mã chuồng heo" (keyup)="checkCode($event.target.value)">
+              <p style="color: red" *ngIf="isExitsCode == 'false'">Mã chuồng heo đã tồn tại.</p>
+              <p style="color: red" *ngIf="getFormEdit.controls.code.hasError('required') && getFormEdit.controls.code.touched">Vui lòng nhập thông tin.</p>
+              <p style="color: red" *ngIf="getFormEdit.controls.code.hasError('pattern')">Nhập sai định dạng CXXX.</p>
+            </div>
+            <div class="mb-3">
+              <label for="employeeCode">Mã nhân viên</label>
+              <input value="{{employee.code}}" disabled type="text" id="employeeCode" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <div class="row">
+                <div class="col-6">
+                  <label for="numberOfIndividuals">Số lượng cá thể <span style="color: red">*</span></label>
+                  <input id="numberOfIndividuals" type="number"
+                         onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"
+                         class="form-control" name="maxNumber" formControlName="maxNumber"
+                         placeholder="Nhập số lượng cá thể">
+                  <p style="color: red" *ngIf="getFormEdit.controls.maxNumber.hasError('required') && getFormEdit.controls.maxNumber.touched">Vui lòng nhập thông tin.</p>
+                  <p style="color: red" *ngIf="getFormEdit.controls.maxNumber.hasError('min')">Vui lòng nhập lớn hơn 1.</p>
+                  <p style="color: red" *ngIf="getFormEdit.controls.maxNumber.hasError('max')">Vui lòng nhập nhỏ hơn 20.</p>
+
+                </div>
+                <div class="col-6">
+                  <label for="typePigs">Loại lợn <span style="color: red">*</span></label>
+                  <select formControlName="typePigs" class="form-control" id="typePigs" ngModel="">
+                    <option selected value="">--Vui lòng chọn--</option>
+                    <option value="0">Lợn thịt</option>
+                    <option value="1">Lợn giống</option>
+                  </select>
+                  <p style="color: red" *ngIf="getFormEdit.controls.typePigs.hasError('required') && getFormEdit.controls.typePigs.touched">Vui lòng nhập thông tin.</p>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="row">
+                <div class="col-6">
+                  <label>Ngày tạo chuồng <span style="color: red">*</span></label>
+                  <input formControlName="creationDate" id="createDate" type="date" class="form-control" required >
+                  <p style="color: red" *ngIf="getFormEdit.controls.creationDate.hasError('required') && getFormEdit.controls.creationDate.touched">Vui lòng nhập thông tin.</p>
+                </div>
+                <div class="col-6">
+                  <label for="closeTime">Ngày đóng chuồng</label>
+                  <input formControlName="buildDate" type="date" id="closeTime" class="form-control">
+                  <p style="color: red" *ngIf="getFormEdit.hasError('dateError') && getFormEdit.controls.creationDate.touched">Vui lòng nhập ngày đóng chuồng sau ngày tạo chuồng.</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+              <button class="btn btn-outline-danger button " [routerLink]="['/pigsty/list']">Quay Lại</button>
+              <button class="btn btn-outline-success button" [disabled]="getFormEdit.invalid||isExitsCode==='false'" type="submit">Chỉnh sửa</button>
+              <button class="btn btn-outline-secondary button " (click)="getForm(pigsty)" type="button">Nhập lại</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  </div>
+</div>

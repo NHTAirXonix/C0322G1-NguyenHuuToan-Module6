@@ -1,0 +1,28 @@
+.body {
+  margin: 0 auto;
+  background-image: url('../../../assets/img/notification-backgroup-list.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  padding: 20px;
+}
+
+.contact-list {
+  background-color: white;
+  border-radius:10px 10px 0 0;
+  padding: 30px 20px 20px 20px;
+  opacity: 90%;
+}
+
+h5{
+  text-align: center!important;
+}
+
+.pigsty-title{
+  font-weight: bolder;
+  text-align: center;
+  font-size: 32px;
+  font-family: "Raleway", sans-serif;
+}
+
+

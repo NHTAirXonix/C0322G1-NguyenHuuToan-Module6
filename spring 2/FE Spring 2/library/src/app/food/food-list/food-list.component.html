@@ -1,0 +1,122 @@
+  <div class="body">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+  <div style="min-height: 518px;border-radius: 10px 10px 0px 0px" class="container container-list  pb-2">
+    <div>
+      <div style="font-family: 'Raleway', sans-serif;font-size: 32px;font-weight: bolder;text-align: center" class="employees-title">DANH SÁCH THỨC ĂN</div>
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-3">
+              <a class="btn btn-outline-success" style=" width: 130px;" href="" routerLink='/food/create'>
+                Thêm mới
+              </a>
+            </div>
+
+            <div class="col-9">
+              <form [formGroup]="formSearch" (ngSubmit)="searchByType()" *ngIf="formSearch">
+                <div class="col-4 mx-auto me-1" style="display: flex; width: 300px ;height: 40px">
+                  <input class="form-control me-1" type="text" placeholder="Loại thức ăn..."
+                         formControlName="typeSearch" name="typeSearch">
+                  <button type="submit" class="btn btn-outline-success" style="width: 150px;">Tìm kiếm</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 *ngIf="foodList.length === 0" style="color: red;text-align: center">Dữ liệu bạn nhập không có ,vui lòng nhập
+        lại.
+      </h2>
+      <div style="border-radius: 20px;" class="table mt-3 mb-3 " *ngIf="foodList.length > 0">
+        <table class="table table-striped ">
+          <thead>
+          <tr style="background-color: #017428">
+            <th class="text-light" width="10%">STT</th>
+            <th class="text-light" width="20%">Mã Đàn Lợn</th>
+            <th class="text-light" width="20%">
+              Số Lượng
+              <button (click)="sortAmount(amountValue)" style="background-color:  #017428;border:none">
+                <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+              </button>
+            </th>
+            <th class="text-light" width="30%">
+              Loại Thức Ăn
+              <button (click)="sortFoodType(foodTypeValue)" style="background-color:  #017428;border:none">
+                <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+              </button>
+            </th>
+            <th class="text-light" width="10%">
+              Đơn Vị
+              <button (click)="sortUnit(unitValue)" style="background-color:  #017428;border:none">
+                <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+              </button>
+            </th>
+            <th class="text-light" width="10%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of foodList; let i=index">
+            <td>{{1 + i + page * 5}}</td>
+            <td>{{item.pigsty.code}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.storage.foodType}}</td>
+            <td>{{item.unit}}</td>
+            <td class=" mb-2">
+              <div class="col button-sua">
+                <a [routerLink]="['/food/edit/',item.id]" class="btn btn-outline-warning">
+                  Chỉnh Sửa
+                </a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div style="background: white;opacity: 90%;height:50px;position: relative;border-radius: 0 0 10px 10px" class="container">
+    <div style=""   class="row col-12 col-xl-6 container pagination-storage float-end " >
+      <!--Phan trang-->
+
+      <div style="display: flex;justify-content: flex-end;margin-left: 15%;" class="row" *ngIf="foodList.length > 0">
+
+        <div class="col-xl-4 col-4" style="width: 17%">
+          <select (change)="sizeTotal(select.value)" #select class="form-select"
+                  aria-label="Default select example">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option [value]="totalElements">full list</option>
+          </select>
+        </div>
+        <div class="col-xl-4 col-4">
+          <div style="text-align: center;">
+            <a class="page-link"><p>{{number + 1}} - {{totalPages}} trên {{totalElements}}</p></a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-4  ">
+          <nav aria-label="Page navigation">
+            <div class="pagination" style="margin-left: 0">
+              <button *ngIf="checkPreview" [routerLink]="" (click)="goPrevious()" type="button"
+                      class="btn btn-outline-primary">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+              </button>
+              <button  *ngIf="checkNext" [routerLink]="" (click)="goNext()"style="margin-left: 0"
+                       type="button"
+                       class="btn btn-outline-primary">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

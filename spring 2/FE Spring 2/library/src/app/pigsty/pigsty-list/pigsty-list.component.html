@@ -1,0 +1,89 @@
+<div class="body">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div style="min-height: 520px;" class="container contact-list pb-2">
+    <div class="pigsty-title mt-2">DANH SÁCH CHUỒNG</div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+          <div class="row">
+            <div class="col-3">
+              <a class=" btn btn-outline-success" type="button" routerLink="/pigsty/create">Thêm mới</a>
+            </div>
+            <div class="col-3 mx-auto me-0" style="display: flex; width: 350px">
+              <input formControlName="name" class="form-control bg-transparent me-1" type="search"
+                     placeholder="Tìm kiếm" aria-label="Search" placeholder="Mã chuồng/Tên nhân viên">
+              <button class="btn btn-outline-success me-0" type="submit" style="width: 130px">Tìm kiếm</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="!checkContent;else elseBlock  ">
+      <div style="color: red" *ngIf="msg" [ngClass]="clss">{{msg}}</div>
+      <table style="border-radius: 20px " class="table table-striped table-hover mt-3 mb-3">
+        <thead>
+        <tr style="background-color: #017428">
+          <th class="text-light" style="width: 5%;">STT</th>
+          <th class="text-light" style="width: 10%;text-align: center">Mã Chuồng</th>
+          <th class="text-light" style="width: 15%;text-align: center">Mã Nhân Viên</th>
+          <th class="text-light" style="width: 15%;text-align: center">Tên Nhân Viên</th>
+          <th class="text-light" style="width: 15%;text-align: center">Ngày Tạo</th>
+          <th class="text-light" style="width: 15%;text-align: center">Ngày Đóng</th>
+          <th class="text-light" style="width: 10%;text-align: center">Số Lượng</th>
+          <td>
+          </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor=" let pigsty of pigstyList; index as i">
+          <td style="text-align: center;vertical-align: middle">{{(i + 1) + (indexPagination * pageSize)}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.code}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.employeeCode}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.employeeName}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.creationDate | date: "dd/MM/yyyy"}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.buildDate | date: "dd/MM/yyyy"}}</td>
+          <td style="text-align: center;vertical-align: middle">{{pigsty.maxNumber}}</td>
+          <td style="text-align: center;vertical-align: middle">
+            <button [routerLink]="['/pigsty/edit/',pigsty.id]" class="btn btn-outline-warning">Chỉnh Sửa</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="background: white;opacity: 90%;height: 50px;position: relative;border-radius: 0 0 10px 10px"
+       class="container">
+    <!--Phan trang-->
+    <ul *ngIf="!checkContent" class="pagination align-items-center justify-content-end" style="position: absolute;top: 0px;right: 24px">
+      <li>
+        <select class="form-select" (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="{{totalElements}}">Tất Cả</option>
+        </select>
+      </li>
+      <li class="page-item"><span style="margin: 0 20px 0 40px">
+             {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}
+        trên {{totalElements}} </span>
+        <button (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"
+                class="btn btn-outline-primary">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"
+                type="button"
+                class="btn btn-outline-primary">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div style="text-align: center; display: flex ;  justify-content: center">
+    <ng-template #elseBlock>
+      <div style="color: red; margin-top: 20px; text-align: center" class="col-12">
+        <h4>Không có dữ liệu tìm kiếm.</h4>
+      </div>
+    </ng-template>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

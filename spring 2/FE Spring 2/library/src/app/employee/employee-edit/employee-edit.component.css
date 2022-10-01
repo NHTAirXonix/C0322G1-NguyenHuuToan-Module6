@@ -1,0 +1,31 @@
+.body {
+  opacity: 85%;
+  margin: 0 auto;
+  background-image: url('../../../assets/img/notification-backgroup-list.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%
+}
+
+.form-text, span, i {
+  color: red;
+}
+
+label {
+  font-weight: bold;
+}
+
+.formRow_create {
+  border-radius: 15px;
+  padding: 15px 15px 15px 15px;
+  box-shadow: 2px 7px 9px 3px #1b191933;
+  background: white;
+  opacity: 94%
+}
+
+.formRow_create_title {
+  text-align: center;
+  background-color: #198754;
+  border-radius: 7px;
+  color: white;
+}

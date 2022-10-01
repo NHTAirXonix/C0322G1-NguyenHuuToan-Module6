@@ -1,0 +1,178 @@
+<div class="body">
+
+  <div class="container-fluid">
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-8 formRow_create" [formGroup]="exportForm" (ngSubmit)="createExport()">
+        <div class="mb-3 text-center formRow_create_title">
+          <h2>THÊM MỚI BẢN GHI</h2>
+        </div>
+        <div class="formRow_create_content">
+          <div class="mb-4">
+            <div class="row">
+              <div class="col-12">
+                <label class="form-label">Mã chuồng xuất <span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="codeExport" formControlName="codeExport" placeholder="VD: MC-xx"
+                       (change)="checkCode($event.target.value)">
+                <div class="validate"
+                     *ngIf="exportForm.controls.codeExport.hasError('required') && exportForm.controls.codeExport.touched">
+                  Mã phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.codeExport.hasError('pattern') && exportForm.controls.codeExport.touched">
+                  Mã phải đúng định dạng MC-xx.>
+                </div>
+                <div *ngIf="isExitsCode==true" class="validate">Mã chuồng đã tồn tại.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Mã chuồng <span style="color: red">*</span> </label>
+                <select class="form-control custom-select bg-light" name="pigsty" formControlName="pigsty"
+                        (change)="getPigsty($event.target.value)" (change)="changTypePigs($event.target.value)">
+                  <option value="">Vui lòng chọn</option>
+                  <option *ngFor="let item of pigstyList" [value]="item.id">{{item.code}}</option>
+                </select>
+                <div class="validate"
+                     *ngIf="exportForm.controls.pigsty.hasError('required') && exportForm.controls.pigsty.touched">
+                  Mã phải bắt buộc nhập.
+                </div>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Loại lợn muốn xuất <span style="color: red">*</span></label>
+                <input class="form-control" disabled name="typePigs" formControlName="typePigs">
+                <div class="validate"
+                     *ngIf="exportForm.controls.typePigs.hasError('required') && exportForm.controls.typePigs.touched">
+                  Loại lợn phải bắt buộc nhập.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Mã nhân viên <span style="color: red">*</span></label>
+                <select class="form-control" name="employee" formControlName="employee"
+                        (change)="changEmployeeName($event.target.value)">
+                  <option value="">Vui lòng chọn</option>
+                  <option *ngFor="let item of employeeList" [value]="item.id"> {{item.code}}</option>
+                </select>
+                <div class="validate"
+                     *ngIf="exportForm.controls.employee.hasError('required') && exportForm.controls.employee.touched">
+                  Mã phải bắt buộc nhập.
+                </div>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Tên nhân viên <span style="color: red">*</span></label>
+                <input type="text" class="form-control" formControlName="employeeName" disabled>
+                <div class="validate"
+                     *ngIf="exportForm.controls.employeeName.hasError('required') && exportForm.controls.employeeName.touched">
+                  Tên phải bắt buộc nhập.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Đơn vị mua <span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="company" formControlName="company">
+                <div class="validate"
+                     *ngIf="exportForm.controls.company.hasError('required') && exportForm.controls.company.touched">
+                  Người mua phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.company.hasError('maxlength') && exportForm.controls.company.touched">
+                  Người mua phải bắt buộc không quá 50 kí tự.
+                </div>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Ngày xuất chuồng <span style="color: red">*</span></label>
+                <input type="date" class="form-control" name="saleDate" formControlName="saleDate">
+                <div class="validate"
+                     *ngIf="exportForm.controls.saleDate.hasError('required') && exportForm.controls.saleDate.touched">
+                  Ngày phải bắt buộc nhập.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Số lượng lợn xuất chuồng <span style="color: red">*</span></label>
+                <input type="number" disabled class="form-control" name="amount" formControlName="amount">
+                <div class="validate"
+                     *ngIf="exportForm.controls.amount.hasError('required') && exportForm.controls.amount.touched">
+                  Số lượng phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.kilogram.hasError('min') && exportForm.controls.kilogram.touched">
+                  Số lượng phải không âm.
+                </div>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Số lượng (Kg) <span style="color: red">*</span></label>
+                <input type="number" disabled class="form-control" name="kilogram" formControlName="kilogram"
+                       (change)="getTotal()">
+                <div class="validate"
+                     *ngIf="exportForm.controls.kilogram.hasError('required') && exportForm.controls.kilogram.touched">
+                  Số lượng phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.kilogram.hasError('min') && exportForm.controls.kilogram.touched">
+                  Số lượng phải không âm.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Số tiền đơn giá (VNĐ) <span style="color: red">*</span></label>
+                <input type="number" class="form-control" formControlName="price" (change)="getTotal()">
+                <div class="validate"
+                     *ngIf="exportForm.controls.price.hasError('required') && exportForm.controls.price.touched">
+                  Tiền phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.price.hasError('min') && exportForm.controls.price.touched">
+                  Giá tiền phải không âm.
+                </div>
+
+              </div>
+              <div class="col-6">
+                <!--                                phần này chỉ để show ra màn hình total-->
+                <label class="form-label">Tổng tiền (VNĐ) <span style="color: red">*</span></label>
+                <input formControlName="total" style="display: none" type="number" disabled class="form-control">
+                <p style="background-color: #E9ECEF; opacity: 1" class="form-control">{{total  | currency :' ' :true: '1.0-3'}}</p>                <div class="validate"
+                     *ngIf="exportForm.controls.total.hasError('required') && exportForm.controls.total.touched">
+                  Giá tiền phải bắt buộc nhập.
+                </div>
+                <div class="validate"
+                     *ngIf="exportForm.controls.total.hasError('min') && exportForm.controls.total.touched">
+                  Giá tiền phải không âm.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+            <button class="btn btn-outline-danger back" type="submit" [routerLink]="['/export/page']"> Quay Lại</button>
+            <button class="btn btn-outline-success" [disabled]="!exportForm.valid"> Thêm mới</button>
+            <button class="btn btn-outline-secondary reset" (click)="reset()" type="button"> Nhập lại</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+</div>
+
+

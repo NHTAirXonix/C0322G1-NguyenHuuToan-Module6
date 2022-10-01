@@ -14,6 +14,7 @@ public class MedicalRecord {
     private String resolve;
     private String deleteStatus;
     private String doctor;
+    private double money;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -23,15 +24,16 @@ public class MedicalRecord {
     public MedicalRecord() {
     }
 
-    public MedicalRecord(Integer medicalId, String medicalCode, String dayStart, String dayEnd, String reason, String resolve, String doctor, String deleteStatus, Patient patient) {
+    public MedicalRecord(Integer medicalId, String medicalCode, String dayStart, String dayEnd, String reason, String resolve, String deleteStatus, String doctor, double money, Patient patient) {
         this.medicalId = medicalId;
         this.medicalCode = medicalCode;
         this.dayStart = dayStart;
         this.dayEnd = dayEnd;
         this.reason = reason;
         this.resolve = resolve;
-        this.doctor = doctor;
         this.deleteStatus = deleteStatus;
+        this.doctor = doctor;
+        this.money = money;
         this.patient = patient;
     }
 
@@ -47,8 +49,8 @@ public class MedicalRecord {
         return medicalCode;
     }
 
-    public void setMedicalCode(String code) {
-        this.medicalCode = code;
+    public void setMedicalCode(String medicalCode) {
+        this.medicalCode = medicalCode;
     }
 
     public String getDayStart() {
@@ -83,6 +85,14 @@ public class MedicalRecord {
         this.resolve = resolve;
     }
 
+    public String getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(String deleteStatus) {
+        this.deleteStatus = deleteStatus;
+    }
+
     public String getDoctor() {
         return doctor;
     }
@@ -91,12 +101,12 @@ public class MedicalRecord {
         this.doctor = doctor;
     }
 
-    public String getDeleteStatus() {
-        return deleteStatus;
+    public double getMoney() {
+        return money;
     }
 
-    public void setDeleteStatus(String deleteStatus) {
-        this.deleteStatus = deleteStatus;
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public Patient getPatient() {

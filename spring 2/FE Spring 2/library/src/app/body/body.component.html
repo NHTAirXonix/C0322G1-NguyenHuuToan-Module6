@@ -1,0 +1,192 @@
+<div class="row" style="background-color: #333;min-height: 80vh;padding: 0;margin: 0;">
+
+  <a class="col-2 book" *ngFor=" let book of bookList" [routerLink]="['/bookDetail',book.id]">
+    <div class="card" style="background-color: unset">
+      <div style="background-color: white; padding: 5px; border-radius: 9px">
+        <img src="{{ book.bookUrlImage }}" class="card-img-top" style="border-radius: 9px;border:1px solid black;">
+      </div>
+      <br>
+      <div style="background-color: orange;height: 25px; border-radius: 9px">
+        <p style="text-align: center;line-height: 25px"><b>{{ book.bookCode }}</b></p>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!--<div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel">-->
+<!--  <div class="carousel-indicators">-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true"-->
+<!--            aria-label="Slide 1"></button>-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
+<!--  </div>-->
+<!--  <div class="carousel-inner">-->
+<!--    <div class="carousel-item active" data-bs-interval="3000">-->
+<!--      <img src="assets/img/header/header-carousel1.png" height="398" class="d-block w-100" alt="...">-->
+<!--      <div class="carousel-caption d-none d-md-block text-light">-->
+<!--        <h5>Hệ thống trang trại</h5>-->
+<!--        <p>Quy mô - Hiện đại - Tiên tiến</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="carousel-item" data-bs-interval="3000">-->
+<!--      <img src="assets/img/header/header-carousel2.jpg" height="398" class="d-block w-100" alt="...">-->
+<!--      <div class="carousel-caption d-none d-md-block text-light">-->
+<!--        <h5>Sản phẩm</h5>-->
+<!--        <p>Cung cấp lợn giống - lợn thịt chất lượng cao</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--  <div class="row mt-5">-->
+<!--    <div class="col-lg-6">-->
+<!--        <div style="font-weight: bolder;font-size: 24px;font-family: 'Raleway', sans-serif;color: seagreen">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-circle-fill"-->
+<!--               viewBox="0 0 16 16">-->
+<!--            <circle cx="8" cy="8" r="8"/>-->
+<!--          </svg>-->
+<!--          TIN TỨC TRONG NGÀY-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4 d-flex justify-content-end">-->
+<!--      <input class="form-control find" type="search" [(ngModel)]="keyword" name="keyword"-->
+<!--             placeholder="Nhập nội dung tìm kiếm" (keydown.enter)="search()" aria-label="Search">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-center">-->
+<!--      <button class="btn btn-outline-success btn-search" (click)="search()">Tìm kiếm</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="vc_empty_space" style="height: 28px"><span class="vc_empty_space_inner"></span></div>-->
+<!--  <div class="row" *ngIf="news && news.length > 0; else elseBlock">-->
+<!--    <div class="col-lg-10 ">-->
+<!--      <div class="row mt-3" *ngFor="let i of news">-->
+<!--        <div class="col-lg-2">-->
+<!--          <a [routerLink]="['/info-news', i.id]">-->
+<!--            <figure>-->
+<!--              <img [src]="i.image" class="img-fluid rounded mx-auto d-block mx-md-auto"-->
+<!--                   alt="...">-->
+<!--            </figure>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <div class="col-lg-10">-->
+<!--          <a [routerLink]="['/info-news', i.id]"><h6>-->
+<!--            &#8226; {{i.title | uppercase |slice : 0:1 }}{{i.title |slice : 1:i.title.length}}</h6></a>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" fill="currentColor"-->
+<!--               class="text-danger bi bi-calendar3"-->
+<!--               viewBox="0 0 16 16">-->
+<!--            <path-->
+<!--              d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>-->
+<!--            <path-->
+<!--              d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>-->
+<!--          </svg>-->
+<!--          <span> {{i.submittedDate | date: 'dd/MM/yyyy'}}</span>-->
+
+<!--          <p class="tooLongContent" [innerHTML]="i.content"></p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div style="height: 50px;position: relative" class="container pagination-advertisement mb-3">-->
+<!--        <ul class="pagination justify-content-end" style="text-align: right">-->
+<!--          <li>-->
+<!--            <select class="form-select selectOnMollibe" (change)="totalElement($event)">-->
+<!--              <option class="nav-link" value="5">5</option>-->
+<!--              <option class="nav-link" value="10">10</option>-->
+<!--              <option class="nav-link" value="15">15</option>-->
+<!--              <option class="nav-link" value="full">Tất cả</option>-->
+<!--            </select>-->
+<!--          </li>-->
+<!--          <li class="page-item">-->
+<!--            <span style="margin: 0 20px 0 40px" class="pageText">-->
+<!--             {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}-->
+<!--              trên {{totalElements}}-->
+<!--   </span>-->
+<!--            <button (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"-->
+<!--                    class="btn btn-outline-primary arrow-left">-->
+<!--              <i class="bi bi-chevron-left"></i>-->
+<!--            </button>-->
+<!--            <button (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"-->
+<!--                    type="button"-->
+<!--                    class="btn btn-outline-primary arrow-right">-->
+<!--              <i class="bi bi-chevron-right"></i>-->
+<!--            </button>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <div class="col-lg-2" style="border-left: 1px solid #a39c9c;padding-left: 2.5%;" >-->
+<!--      <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--        <div class="row mb-5" *ngIf="temp.placement.name==='Ở trên'">-->
+<!--          <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--        </div>-->
+<!--      </div></a>-->
+<!--      <a href="https://hanofeed.com/"> <div *ngFor="let temp of advertisement">-->
+<!--        <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa trên'">-->
+<!--          <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--        </div>-->
+<!--      </div></a>-->
+<!--      <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--        <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa'">-->
+<!--          <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--        </div>-->
+<!--      </div></a>-->
+<!--      <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--        <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa cuối'">-->
+<!--          <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--        </div>-->
+<!--      </div></a>-->
+<!--      <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--        <div class="row mb-5" *ngIf="temp.placement.name==='Ở cuối'">-->
+<!--          <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--        </div>-->
+<!--      </div></a>-->
+
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+
+<!--  <ng-template #elseBlock>-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-10 mt-5">-->
+<!--        <div class="mt-4" style="text-align: center;font-size: 20px;color: red">Không tìm thấy dữ liệu.</div>-->
+<!--      </div>-->
+
+<!--      <div class="col-lg-2" style="border-left: 1px solid #a39c9c;padding-left: 2.5%;" >-->
+<!--        <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--          <div class="row mb-5" *ngIf="temp.placement.name==='Ở trên'">-->
+<!--            <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--          </div>-->
+<!--        </div></a>-->
+<!--        <a href="https://hanofeed.com/"> <div *ngFor="let temp of advertisement">-->
+<!--          <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa trên'">-->
+<!--            <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--          </div>-->
+<!--        </div></a>-->
+<!--        <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--          <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa'">-->
+<!--            <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--          </div>-->
+<!--        </div></a>-->
+<!--        <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--          <div class="row mb-5" *ngIf="temp.placement.name==='Ở giữa cuối'">-->
+<!--            <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--          </div>-->
+<!--        </div></a>-->
+<!--        <a href="https://trungtambocobavi.com/mot-giong-bo-thit-o-viet-nam"> <div *ngFor="let temp of advertisement">-->
+<!--          <div class="row mb-5" *ngIf="temp.placement.name==='Ở cuối'">-->
+<!--            <img class="ads-body" src="{{temp.image}}" alt="">-->
+<!--          </div>-->
+<!--        </div></a>-->
+
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+<!--</div>-->
+<!--<app-contact-create></app-contact-create>-->
+

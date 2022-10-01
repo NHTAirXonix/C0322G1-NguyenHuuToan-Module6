@@ -44,8 +44,8 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord,Int
                  @Param("patient_id") Integer patient_id
     );
 
-    @Query(value = "select * from medical_record where delete_status = 1 and doctor like %:name%", nativeQuery = true)
-    List<MedicalRecord> searchC(@Param("name") String name);
+    @Query(value = "select * from medical_record where delete_status = 1 and doctor like %:name% and patient_id like %:patientId%", nativeQuery = true)
+    List<MedicalRecord> searchC(@Param("name") String name,@Param("patientId") String patientId);
 
     @Query(value = "select month(day_start) as thang, count(*) as patient from medical_record where year(day_start) = 2022 group by (month(day_start)) order by thang;", nativeQuery = true)
     List<String[]> getChart();

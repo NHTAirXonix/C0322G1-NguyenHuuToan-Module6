@@ -1,0 +1,33 @@
+body, h2 {
+  margin: 0 auto;
+  /*background-image: url('src/assets/soil-association-pigs-1024x768.jpeg');*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.bg{
+  background-image: url('src/assets/img/body/backgroup.jpg');
+}
+
+.container {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  opacity: 94%;
+}
+
+td, th{
+  text-align: left;
+}
+
+th{
+  color: white;
+}
+
+pig-title{
+  font-weight: bolder;
+  text-align: center;
+  font-size: 32px;
+  font-family: "Raleway", sans-serif;
+}

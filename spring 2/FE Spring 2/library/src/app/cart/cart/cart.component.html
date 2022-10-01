@@ -1,0 +1,42 @@
+<div class="row" style="background-color: #333;min-height: 100vh">
+  <div class="col-1"></div>
+  <div class="col-7" style="padding: 20px">
+    <div style="background-color: white;border-radius: 10px;padding: 20px">
+      <h1 style="text-align: center; color: orange"><b>GIỎ HÀNG</b></h1>
+      <table class="table">
+        <tr style="background-color: #333;color: orange; border-radius: 10px;">
+          <th><p>Tên Sách</p></th>
+          <th><p>Giá Sách</p></th>
+          <th><p>Số Lượng</p></th>
+          <th><p>Tổng Tiền</p></th>
+          <th><p>Xoá</p></th>
+        </tr>
+        <tr *ngFor="let item of listCart">
+          <td><img class="card-img-top" src="{{ item.book.bookUrlImage }}" style="height: 150px;width: 120px" > {{ item.book.bookCode }}</td>
+          <td>{{ item.book.bookPrice | number}} đ</td>
+          <td>{{ item.amount }}</td>
+          <td><b style="color: red">{{ item.amount * item.book.bookPrice | number }} đ</b></td>
+          <td> <button class="btn btn-outline-danger"> Xoá </button> </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-3" style="padding: 20px">
+    <div style="background-color: white;border-radius: 10px;padding: 20px">
+      <p><b>Tên tài khoảng</b></p>
+      <p>{{ user.username }}</p>
+      <p><b>Địa chỉ</b></p>
+      <p>{{ user.address }}</p>
+      <p><b>Tổng tiền cần thanh toán</b></p>
+      <p style="color: red"><b>{{ total | number}} đ</b></p>
+      <hr>
+      <div id="payments"></div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+
+
+  <div class="col-1"></div>
+</div>

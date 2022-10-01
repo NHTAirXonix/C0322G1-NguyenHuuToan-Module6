@@ -1,0 +1,84 @@
+<div class="container-fluid body">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-6 formRow_create" [formGroup]="formPig" (ngSubmit)="submitCreate()">
+        <div class="mb-3 formRow_create_title">
+          <h5> Thêm cá thể</h5>
+        </div>
+        <hr>
+        <div class="formRow_create_content">
+          <div class="mb-3">
+            <label class="form-label">Mã lợn <span class="text-danger">*</span> </label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="VD: L-001"
+                   formControlName="code" (change)="checkCode($event.target.value)">
+            <div>
+              <div><span style="color:red" *ngIf="formPig.get('code').dirty
+          &&formPig.hasError('required','code')">Mã lợn không được để trống.</span></div>
+              <div><span style="color: red" *ngIf="isExitsCode == true">Mã lợn đã tồn tại.</span></div>
+              <div><span style="color:red" *ngIf="formPig.get('code').dirty
+          &&formPig.hasError('pattern','code')">Mã lợn phải đúng định dạng L-XXX (VD:L-001).</span></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mã chuồng nuôi<span class="text-danger">*</span></label>
+
+            <select class="form-control" formControlName="pigsty">
+              <option class="option" value=''>Chọn mã chuồng</option>
+              <option *ngFor="let type of pigsty" class="form-control" [ngValue]="type">{{type.code}}</option>
+            </select>
+            <div><span style="color:red" *ngIf="formPig.get('pigsty').dirty
+          &&formPig.hasError('required','pigsty')">Mã chuồng không được để trống.</span></div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-md">
+                <label class="form-label">Ngày nhập chuồng<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" formControlName="dateIn">
+                <p style="color: red; font-size: 0.8rem" *ngIf="formPig.get('dateIn').touched
+                && formPig.hasError('required', 'dateIn')">Ngày không được để trống.</p>
+              </div>
+
+              <div class="col-md">
+                <label class="form-label">Ngày xuất chuồng<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" formControlName="dateOut">
+                <p style="color: red; font-size: 0.8rem" *ngIf="formPig.get('dateOut').touched
+                && formPig.hasError('required', 'dateOut')">Ngày không được để trống.</p>
+                <p style="color: red; font-size: 0.8rem" *ngIf="formPig.get('dateOut').dirty
+                && formPig.hasError('checkDate')">Ngày xuất chuồng phải sau ngày nhập chuồng.</p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tình trạng<span class="text-danger">*</span></label>
+            <select class="form-control" disabled id="status" formControlName="status">
+              <option value="0" class="form-control">Khỏe mạnh</option>
+            </select>
+            <p style="color: red; font-size: 0.8rem" *ngIf="formPig.get('status').touched
+                && formPig.hasError('required', 'status')">Tình trạng không được để trống.</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Cân nặng(Kg)<span class="text-danger">*</span></label>
+            <input type="number" class="form-control" placeholder="VD: 80Kg" formControlName="weight" autocomplete="on">
+            <div>
+            <span style="color:red" *ngIf="formPig.get('weight').dirty
+          &&formPig.hasError('required','weight')">Cân nặng không được để trống.</span>
+              <span style="color: red" *ngIf="formPig.get('weight').dirty
+                  && formPig.hasError('min', 'weight')">Cân nặng phải là số dương. &nbsp;&nbsp;</span>
+              <span style="color: red" *ngIf="formPig.get('weight').dirty
+                && formPig.hasError('max', 'weight')">Cân nặng tối đa 200 kg.</span>
+            </div>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+            <button type="button" (click)="cancel()" class="btn btn-outline-danger"> Quay Lại</button>
+            <button type="submit" [disabled]="formPig.invalid" class="btn btn-outline-success">Thêm mới</button>
+            <button type="button" (click)="reset()" class="btn btn-outline-secondary"> Nhập Lại </button>
+          </div>
+
+        </div>
+      </form>
+      <!--    <code>{{ formPig.value | json}}</code>-->
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

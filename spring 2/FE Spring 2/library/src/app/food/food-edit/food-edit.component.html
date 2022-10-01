@@ -1,0 +1,59 @@
+
+<body>
+<div class="container-fluid">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-6 formRow_create" [formGroup]="foodForm">
+        <div class="mb-3 formRow_create_title">
+          <h5><b>SỬA KHỐI LƯỢNG THỨC ĂN</b></h5>
+        </div>
+        <hr>
+        <div class="formRow_create_content">
+          <div class="mb-3">
+            <label class="form-label">Mã Đàn lợn <span class="text-danger">*</span> </label>
+            <select class="form-control" formControlName="pigsty">
+              <option selected *ngFor="let item of pigsties" [ngValue]="item.id">{{item.code}}</option>
+            </select>
+            <span style="color: red" *ngIf="foodForm.controls.pigsty.hasError('required') && foodForm.controls.pigsty.touched">Vui lòng nhập</span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Loại Thức Ăn <span class="text-danger">*</span></label>
+            <select disabled class="form-control" formControlName="storage" >
+              <option  *ngFor="let item of storages" [ngValue]="item.id">{{item.foodType}}</option>
+            </select>
+            <span style="color: red" *ngIf="foodForm.controls.storage.hasError('required') && foodForm.controls.storage.touched">Vui lòng nhập</span>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-md">
+                <label class="form-label">Số Lượng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" formControlName="amount">
+                <span style="color: red" *ngIf="foodForm.controls.amount.hasError('required') && foodForm.controls.amount.touched">Vui lòng nhập</span>
+                <span style="color: red" *ngIf="foodForm.controls.amount.hasError('min') && foodForm.controls.amount.touched">Không được nhập số âm</span>
+              </div>
+              <div class="col-md">
+                <label class="form-label">Đơn Vị <span class="text-danger">*</span> </label>
+                <select class="form-control" formControlName="unit">
+                  <option value="" disabled >Vui Lòng Chọn </option>
+                  <option value="Kg/Ngày">Kg/Ngày</option>
+                  <option value="Kg/Tháng">Kg/Tháng</option>
+                  <option value="Kg/Năm">Kg/Năm</option>
+                </select>
+                <span style="color: red" *ngIf="foodForm.controls.unit.hasError('required') && foodForm.controls.unit.touched">Vui lòng nhập</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+            <button class="btn btn-outline-danger" routerLink="/food"> Quay Lại</button>
+            <button class="btn btn-outline-success" (click)="editFood(id)" [disabled]="foodForm.invalid"> Cập Nhật</button>
+            <button class="btn btn-outline-secondary" (click)="getFood(id)"> Nhập Lại</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+</div>
+</body>

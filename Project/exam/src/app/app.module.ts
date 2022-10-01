@@ -12,6 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CustomerModule} from './medical_module/customer.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -36,9 +37,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     }),
     CustomerModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,151 @@
+<div class="body">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div style="min-height:520px;border-radius: 10px " class="container container-list mt-5 pb-2">
+    <div style="font-weight: bolder;font-size: 32px;font-family: 'Raleway', sans-serif;text-align: center" class="export-title mt-3">DANH SÁCH CHUỒNG XUẤT</div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-2 d-grid gap-2 d-md-flex">
+        <button class="btn btn-outline-success background-btn-add mt-4" [routerLink]="['/export/create']">Thêm mới
+          <i class="fa-solid fa-plus"></i></button>
+      </div>
+      <div class="col-sm-12 mt-3 col-lg-10 d-flex justify-content-end">
+        <form class="d-flex justify-content-end" [formGroup]="searchForm" (ngSubmit)="searchExport()">
+          <div class="col-sm-3 pe-2" style="width: 28%">
+            <input class="form-control bg-transparent py-2 w-100" type="search"
+                   name="codeExport" formControlName="codeExport"
+                   placeholder="Tìm kiếm mã chuồng">
+          </div>
+          <div class="col-sm-3 pe-2" style="width: 28%">
+            <input class="form-control bg-transparent py-2 w-100" type="search"
+                   name="companySearch" formControlName="companySearch"
+                   placeholder="Tìm kiếm công ty">
+          </div>
+          <div class="col-sm-3 pe-2" style="width: 28%;">
+            <input class="form-control bg-transparent py-2 w-100" type="search"
+                   name="employeeSearch" formControlName="employeeSearch"
+                   placeholder="Tìm kiếm nhân viên">
+          </div>
+          <div class="col-sm-2 mt-1 justify-content-md-around">
+            <button class="btn btn-outline-success" (keyup.enter)="searchExport()">Tìm kiếm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div style="overflow-x:auto; min-height: 261px"
+         *ngIf="listExport && listExport.length > 0; else elseBlock">
+      <table style="border-radius: 20px"
+             class="table table-striped table-hover mt-3 mb-3 col-sm-12">
+        <thead>
+        <tr style="background-color: #017428">
+          <th class="text-light" style="width: 2%">STT</th>
+          <th class="text-light" style="width: 10%">Mã Chuồng Xuất</th>
+          <th class="text-light" style="width: 9%">Mã Nhân Viên</th>
+          <th class="text-light" style="width: 11%">Tên Nhân Viên</th>
+          <th class="text-light" style="width: 13%">Đơn Vị</th>
+          <th class="text-light" style="width: 10%">Ngày Xuất</th>
+          <th class="text-light" style="width: 10%">Số Lượng(Con)</th>
+          <th class="text-light" style="width: 8%">Số Lượng(Kg)</th>
+          <th class="text-light" style="width: 7%">Loại Lợn</th>
+          <th class="text-light" style="width: 10%">Đơn Giá(VND)</th>
+          <th class="text-light" style="width: 10%">Tổng Tiền(VND)</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let item of listExport, index as i">
+        <tr>
+          <td>{{(i + 1) + 5 * number}}</td>
+          <td>{{item.codeExport}}</td>
+          <td>{{item.codeEmployee}}</td>
+          <td>{{item.nameEmployee}}</td>
+          <td>{{item.company}}</td>
+          <td>{{item.saleDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.kilogram}}</td>
+          <td>
+            <span *ngIf="item.typePigs == 0">Lợn thịt</span>
+            <span *ngIf="item.typePigs == 1 ">Lợn giống</span>
+          </td>
+          <td>{{item.price | currency :' ' :true: '1.0-3'}}</td>
+          <td>{{item.price * item.kilogram | currency :' ' :true: '1.0-3'}}</td>
+          <td>
+            <input class="form-check-input" type="checkbox" [checked]="checkbox(item)" (change)="getListDelete(item)">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="background: white;opacity: 94%;height: 100px;position: relative;border-radius: 0 0 10px 10px"
+         class="container">
+      <div style="text-align: center; display: flex; justify-content: center" *ngIf="deleteList.length>0">
+        <button class="col-3 btn btn-warning" style="width: auto; margin-right: 5%"
+                type="button" [routerLink]="['/export/update',deleteList[0].id]"
+                [disabled]="deleteList.length!=1">Chỉnh Sửa
+        </button>
+        <button class="col-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                style="width: auto;" type="submit" [disabled]="deleteList.length<1">Xoá
+        </button>
+      </div>
+      <!--Phan trang-->
+      <div style="height: 50px;position: relative" class="container pagination-advertisement mb-3">
+        <ul class="pagination justify-content-end" style="text-align: right">
+          <li>
+            <select class="form-select" (change)="totalElement($event)">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="full">Tất Cả</option>
+            </select>
+          </li>
+          <li class="page-item">
+              <span style="margin: 0 20px 0 40px">
+               {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}
+                trên {{totalElements}}
+              </span>
+            <button (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"
+                    class="btn btn-outline-primary">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"
+                    type="button"
+                    class="btn btn-outline-primary">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chú ý!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có muốn xóa các chuồng lợn đã xuất sau:</p>
+          <ul *ngFor="let item of deleteList, index as i">
+            {{i + 1}}. {{item.codeExport}}
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetId()">
+            Hủy
+          </button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteId()">
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; display: flex; justify-content: center">
+    <ng-template #elseBlock>
+      <div style="color: red;" class="col-12 mt-4">
+        <h2 style="text-align: center">Không có dữ liệu để hiển thị.</h2>
+      </div>
+    </ng-template>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

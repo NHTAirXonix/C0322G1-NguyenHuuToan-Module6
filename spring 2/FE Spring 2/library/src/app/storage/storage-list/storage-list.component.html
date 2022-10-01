@@ -1,0 +1,92 @@
+<div class="body">
+  <div class="vc_empty_space" style="height: 50px"><span class="vc_empty_space_inner"></span></div>
+  <div style="min-height: 430px;border-radius: 10px" class="container mt-4 pb-2">
+    <div style="font-weight: bolder;font-size: 32px;font-family: 'Raleway', sans-serif;text-align: center" class="employees-title">DANH SÁCH KHỐI LƯỢNG THỨC ĂN TRONG KHO</div>
+    <div class="row">
+      <form [formGroup]="searchForm">
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3" style="padding-left: 10px ">
+                <a class=" btn btn-outline-success" routerLink="/storage/create">Thêm Mới</a>
+              </div>
+              <div class="col-5"></div>
+              <div class="col-3 mx-auto me-0" style="display: flex; width: 350px">
+                <input formControlName="foodType" class="form-control bg-transparent me-2  "
+                       type="search" placeholder="Loại thức ăn">
+                <button class="btn btn-outline-success" type="submit" style="width: 130px" (click)="searchStorage()">Tìm
+                  Kiếm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div *ngIf="storageList && storageList.length > 0, else elseBlock " style="min-height: 250px">
+        <table style="border-radius: 20px" class="table table-striped table-hover mt-3 mb-3">
+          <thead>
+          <tr style="background-color: #017428">
+            <th class="text-light">STT</th>
+            <th style="width: 20%" class="text-light">Loại Thức Ăn</th>
+            <th class="text-light">Số Lượng</th>
+            <th class="text-light">Đơn Vị</th>
+            <th class="text-light">Ngày Nhập</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let storage of storageList ; index as i">
+            <td>{{(i + 1) + 5 * number}}</td>
+            <td>{{storage.foodType}}</td>
+            <td>{{storage.amount}}</td>
+            <td>{{storage.unit}}</td>
+            <td>{{storage.date|date:'dd/MM/yyyy'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="text-align: center; display: flex; justify-content: center">
+      <ng-template #elseBlock>
+        <div style="color: red;text-align: center;height: 316px" class="col-12"><h3>Không có dữ liệu tìm kiếm.</h3>
+        </div>
+      </ng-template>
+    </div>
+    <div *ngIf="storageList && storageList.length > 0">
+      <!--      phân trang-->
+      <div style="background: white;opacity: 90%;height: 50px;position: relative;border-radius: 0 0 10px 10px"
+           class="container">
+        <ul class="pagination justify-content-end" style="text-align: right">
+          <li>
+            <select class="form-select" (change)="totalElement($event)">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="full">Tất cả</option>
+            </select>
+          </li>
+          <li class="page-item"><span style="margin: 0 20px 0 40px">
+             {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}
+            trên {{totalElements}}</span>
+            <button (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"
+                    class="btn btn-outline-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+              </svg>
+            </button>
+            <button (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"
+                    type="button"
+                    class="btn btn-outline-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

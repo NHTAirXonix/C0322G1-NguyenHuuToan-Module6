@@ -1,0 +1,138 @@
+<div class="body" style="margin: 0;padding: 0; min-width: 500px">
+
+  <div id="pdf" class="row" style="width: auto;margin: 0;padding: 0;height: auto">
+
+    <div class="col-xl-3 col-md-12 col-sm-12" style="padding: 0; margin: 0; min-height: 600px">
+      <div style="background-color: white;height: 94%;border-radius: 10px;opacity: 90%; margin-left: 20px;margin-right: 10px;margin-bottom: 20px; margin-top: 20px; padding: 10px">
+        <h1 class="titles"><b>THỐNG KÊ</b></h1>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <div style="overflow-y: auto; height: 500px">
+              <table class="table table-striped table-bordered">
+                <thead>
+                <tr style="background-color: #198754; color: white">
+                  <th>Thời gian - Công ty</th>
+                  <th>Số lượng heo (Con)</th>
+                  <th>Doanh thu (VND)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of listStatistic">
+                  <td>{{ item.time }}</td>
+                  <td>{{ item.amount }}</td>
+                  <td>{{ item.price | number }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-9 col-md-12 col-sm-12" style="padding: 0; margin: 0; min-height: 600px">
+      <div style="background-color: white;height: 94%;border-radius: 10px;opacity: 90%; margin-left: 10px;margin-right: 20px;margin-bottom: 20px; margin-top: 20px; padding: 10px">
+
+        <div class="row" style="padding: 0;margin: 0" >
+          <div [hidden]="hiddenChart" class="col-12">
+            <canvas id="myChart" width="100%" height="50%"></canvas>
+          </div>
+          <div [hidden]="hiddenPieChart" class="col-md-6">
+            <canvas id="myPieChart1" width="100%" height="50%"></canvas>
+          </div>
+          <div [hidden]="hiddenPieChart" class="col-md-6">
+            <canvas id="myPieChart2" width="100%" height="50%"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="width: auto;margin: 0;padding-left: 20px;padding-right: 20px;padding-bottom: 20px;height: auto">
+
+    <div class="col-xl-12 col-md-12 col-sm-12" style="width: 100%;background-color: white;border-radius: 10px;opacity: 90%; padding: 10px">
+      <div style="width: 100%">
+        <form (ngSubmit)="onSubmit()" [formGroup]="statisticForm">
+          <div class="row" style="margin: 0;padding: 0">
+            <div class="col-md-1"><p class="centerText"><b>Ngày bắt đầu</b></p></div>
+            <div class="col-md-1"><input class="form-control" type="date" formControlName="startDate"></div>
+
+            <div class="col-md-1"><p class="centerText"><b>Ngày kết thúc</b></p></div>
+            <div class="col-md-1"><input class="form-control" type="date" formControlName="endDate"></div>
+
+            <div class="col-md-1"><p class="centerText"><b>Đơn Vị Thời gian</b></p></div>
+            <div class="col-md-1">
+              <select class="form-select" formControlName="styleTime">
+                <option value='month'>Tháng</option>
+                <option value='year'>Năm</option>
+              </select>
+            </div>
+
+            <div class="col-md-1"><p class="centerText"><b>Loại heo</b></p></div>
+            <div class="col-md-1">
+              <select class="form-select" formControlName="type">
+                <option value="all">Tất cả</option>
+                <option value="0">Heo Giống</option>
+                <option value="1">Heo Thịt</option>
+              </select>
+            </div>
+
+            <div class="col-md-1"><p class="centerText"><b>Công ty</b></p></div>
+            <div class="col-md-1">
+              <select class="form-select" formControlName="company">
+                <option value="all">Tất cả</option>
+                <option *ngFor="let item of listCompany" value="{{ item }}">{{ item }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-1"><p class="centerText"><b>Biểu đồ</b></p></div>
+            <div class="col-md-1">
+              <select class="form-select" formControlName="chartStyle">
+                <option value="pie">Loại tròn</option>
+                <option value="bar">Loại cột</option>
+              </select>
+            </div>
+
+          </div>
+
+
+          <div [hidden]="!statisticForm.invalid" class="row">
+            <div class="col-md">
+              <p style="margin-top: 13px;margin-bottom: 3px;color: red" *ngIf="statisticForm.get('startDate').invalid && statisticForm.get('startDate').touched">
+                {{ statisticForm.get('startDate').errors.message }}
+              </p>
+            </div>
+            <div class="col-md">
+              <p style="margin-top: 13px;margin-bottom: 3px;color: red" *ngIf="statisticForm.get('endDate').invalid && statisticForm.get('endDate').touched">
+                {{ statisticForm.get('endDate').errors.message }}
+              </p>
+            </div>
+            <div class="col-md">
+              <p style="margin-top: 13px;margin-bottom: 3px;color: red" *ngIf="statisticForm.invalid && statisticForm.get('endDate').touched">
+                {{ statisticForm.errors.message }}
+              </p>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="position-relative">
+              <div class="position-absolute top-50 start-50 translate-middle">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group  " role="group" aria-label="First group" style="margin-right: 5px">
+                    <button [disabled]="statisticForm.invalid" type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Phân Tích</button>
+                  </div>
+                  <div class="btn-group  " role="group" aria-label="Second group" style="margin-left: 5px">
+                    <button type="button" class="btn btn-outline-success" (click)="exportPdf()">Xuất Dữ Liệu</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+      </div>
+    </div>
+
+  </div>
+</div>

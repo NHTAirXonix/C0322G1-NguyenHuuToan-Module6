@@ -1,0 +1,92 @@
+<body>
+<div class="container-fluid mt-3">
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-5 formRow_create" [formGroup]="vaccinationForm" (ngSubmit)="submit()">
+        <div class="mb-3 formRow_create_title">
+          <h5 style="text-align: center"><b>THÊM LỊCH TIÊM PHÒNG</b></h5>
+        </div>
+        <hr>
+        <div class="formRow_create_content">
+          <div class="mb-3">
+            <label class="form-label">Chuồng <span>*</span></label>
+            <select class="form-select" id="inlineFormSelectPref" formControlName="pigstyCode" (change)="getData($event.target.value)">
+              <option value="" [selected]="pigstyType" selected disabled>{{pigstyType}}</option>
+              <option *ngFor="let p of pigstys" [value]="p.id">{{p.code}}</option>
+            </select>
+            <div class="form-text"><span><p *ngIf="vaccinationForm.controls.pigstyCode.hasError('required') && vaccinationForm.controls.pigstyCode.touched">Không
+                được để trống</p></span></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Ngày đóng chuồng</label>
+            <input type="text" readonly class="form-control" value="{{createPigsty}}"  >
+          </div>
+
+          <div class="mb-3" *ngIf="vaccinationForm.controls.pigstyCode.dirty">
+            <label class="form-label">Loại vaccine <span>*</span></label>
+            <select class="form-select" id="inlineFormSelectPref1" formControlName="vaccineType" (change)="checkDate()">
+              <option value="" [selected]="vaccineType" selected disabled>{{vaccineType}}</option>
+              <option value="PRRS" >Phòng PRRS</option>
+              <option value="Mycoplasma">Phòng Mycoplasma</option>
+              <option value="CSF">Phòng CSF(dịch tả)</option>
+              <option value="FMD">Phòng FMD(lở mồm long móng)</option>
+              <option value="APP">Phòng APP(viêm phổi dính sườn)</option>
+            </select>
+            <div class="form-text"><span><p
+              *ngIf="vaccinationForm.controls.vaccineType.hasError('required') && vaccinationForm.controls.vaccineType.touched">
+                  Không được để trống</p></span></div>
+          </div>
+          <div class="mb-3" *ngIf="vaccinationForm.controls.pigstyCode.dirty">
+            <label class="form-label">Ngày tiêm phòng</label>
+            <input type="text" readonly class="form-control" formControlName="date" [(ngModel)]="date2">
+            <div class="form-text"><span><p
+              *ngIf="vaccinationForm.controls.date.hasError('required') && vaccinationForm.controls.date.touched">
+                  Không được để trống</p></span></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Người/TT tiêm phòng <span>*</span></label>
+            <input type="text" class="form-control" placeholder="Nhập người tiêm phòng" formControlName="vaccinatedPerson">
+            <div class="form-text">
+              <span><p *ngIf="vaccinationForm.controls.vaccinatedPerson.hasError('required') && vaccinationForm.controls.vaccinatedPerson.touched">Không
+                được để trống</p>
+                <p *ngIf="vaccinationForm.controls.vaccinatedPerson.hasError('pattern') && vaccinationForm.controls.vaccinatedPerson.touched">Không
+                  đúng định dạng</p></span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Số lượng lợn được tiêm <span>*</span></label>
+            <input type="number" class="form-control" placeholder="Nhập số lợn được tiêm" formControlName="amount">
+            <div class="form-text">
+            <span><p
+              *ngIf="vaccinationForm.controls.amount.hasError('required') && vaccinationForm.controls.amount.touched">Không
+                được để trống</p>
+                <p *ngIf="vaccinationForm.controls.amount.hasError('min') && vaccinationForm.controls.amount.touched">Số lợn phải lớn hơn 0</p>
+                <p *ngIf="vaccinationForm.controls.amount.hasError('max') && vaccinationForm.controls.amount.touched">Số lợn phải nhỏ hơn 20</p>
+              </span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ghi chú</label>
+            <textarea type="te" class="form-control" id="formGroupExampleInput5"
+                      placeholder="Nhập ghi chú" formControlName="note"></textarea>
+            <div class="form-text">
+              <span><p *ngIf="vaccinationForm.controls.amount.hasError('maxLength') && vaccinationForm.controls.amount.touched">Không
+                được để trống</p>
+              </span>
+            </div>
+          </div>
+          <div  class="d-grid gap-2 d-md-flex justify-content-md-around">
+            <a class="btn btn-outline-danger" [routerLink]="['/vaccination']"> Quay Lại</a>
+            <button class="btn btn-outline-success" type="submit" [disabled]="vaccinationForm.invalid"> Thêm mới</button>
+            <button class="btn btn-outline-secondary" type="reset"> Nhập lại</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>
+</body>

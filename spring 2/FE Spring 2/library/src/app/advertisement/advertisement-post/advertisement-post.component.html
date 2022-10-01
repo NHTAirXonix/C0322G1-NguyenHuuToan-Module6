@@ -1,0 +1,103 @@
+<div class="body">
+
+  <div class="body">
+    <div class="container-fluid ">
+
+      <div class="container-fluid body">
+
+
+        <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+        <div class="container">
+          <div class="row formRow" >
+            <form class="col-lg-6 formRow_create" [formGroup]="formAdvertisement" (ngSubmit)="submit()">
+              <div class="mb-3 text-center">
+                <strong> <h5 class="formRow_create_title">ĐĂNG QUẢNG CÁO</h5></strong>
+              </div>
+              <hr>
+              <div class="formRow_create_content">
+                <div class="mb-3">
+                  <label class="form-label">Tiêu đề </label>
+                  <input type="text" class="form-control" formControlName="title">
+                  <div style="color:red;"
+                       *ngIf="!formAdvertisement.controls.title?.valid && (formAdvertisement.controls.title?.dirty||formAdvertisement.controls.title?.touched)">
+                    Không nhập kí tự đặc biệt,số và tối đa 50 kí tự.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Thời gian (tuần) <span style="color: red">*</span></label>
+                  <input type="text" class="form-control" formControlName="timeExistence">
+                  <div style="color:red;"
+                       *ngIf="!formAdvertisement.controls.timeExistence?.valid && (formAdvertisement.controls.timeExistence?.dirty||formAdvertisement.controls.timeExistence?.touched)">
+                    Không để trống và không nhập kí tự , chữ.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Ngày đăng <span style="color: red">*</span></label>
+                  <input type="date" class="form-control" formControlName="submittedDate" (change)="checkDateTime($event.target.value)">
+                  <div style="color:red;"
+                       *ngIf="formAdvertisement.controls.submittedDate.hasError('required') && (formAdvertisement.controls.submittedDate?.dirty||formAdvertisement.controls.submittedDate?.touched)">
+                    Không được để trống.
+                  </div>
+                  <div style="color:red;"
+                       *ngIf="isExistDate == true">
+                    Quảng cáo khác đang được tồn tại.
+                  </div>
+                  <div style="color:red;"
+                       *ngIf="formAdvertisement.controls.submittedDate.hasError('date') && (formAdvertisement.controls.submittedDate?.dirty||formAdvertisement.controls.submittedDate?.touched)">
+                    Không được nhỏ hơn ngày hiện tại.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Vị trí <span style="color: red">*</span></label>
+                  <select class="form-control" formControlName="placement">
+                    <option value="">Chọn</option>
+                    <option *ngFor="let temp of placementList" [ngValue]="temp">{{temp.name}}</option>
+                  </select>
+                  <div style="color:red;"
+                       *ngIf="!formAdvertisement.controls.placement?.valid && (formAdvertisement.controls.placement?.dirty||formAdvertisement.controls.placement?.touched)">
+                    Không được để trống.
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label>Hình ảnh  <span style="color: red">*</span></label>
+                    </div>
+                    <div style="margin-top: 20px">
+                      <input type="file" class="form-control"  style="width: 48%" multiple (change)="selectFile($event)"
+                             (change)="onFileSelected($event)"  >
+                    </div>
+                    <div style="margin-top: 20px">
+                      <img *ngIf="!editImageState" [src]="formAdvertisement.get('image').value" width="300" height="auto" >
+                      <img class="preview-img rounded" [src]="url" *ngIf="editImageState" width="300" height="auto"  >
+                    </div>
+                    <div style="color: red" *ngIf="checkImgSize == true" class="form-text text-danger mt-1 px-2">Kích thước ảnh quá lớn.</div>
+                    <div  style="color: red" *ngIf="checkImg == true && checkImgSize == false && regexImageUrl == false"
+                          class="form-text text-danger mt-1 px-2">Chọn ảnh.
+                    </div>
+                    <div  style="color: red" *ngIf="regexImageUrl == true && checkImgSize == false" class="form-text text-danger mt-1 px-2">Sai định dạng
+                      ảnh.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="button d-grid gap-2 d-md-flex justify-content-md-around" style="margin-top: 20px">
+                <button style="height: 38px" class="btn btn-outline-danger back" [routerLink]="['/advertisement/page']">Quay lại</button>
+                <button type="submit" *ngIf="buttonAdvertisementStatus" style="height: 38px;width: 121px" class="btn btn-outline-success" [disabled]="!formAdvertisement.valid"> Thêm mới </button>
+                <button *ngIf="!buttonAdvertisementStatus" style="height: 38px;width: 121px" class="btn btn-outline-success disabled" >
+                  <div class="spinner-border spinner-border-sm "></div>
+                  Đang tải ...
+                </button>
+                <button style="height: 38px" class="btn btn-outline-secondary" type="reset" >Nhập lại</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+      </div>
+    </div>
+  </div>
+</div>

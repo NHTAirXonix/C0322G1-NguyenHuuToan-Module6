@@ -1,0 +1,50 @@
+.formRow {
+  display: flex;
+  justify-content: center;;
+}
+
+.formRow_create {
+  border-radius: 15px;
+  padding: 15px 15px 15px 15px;
+  box-shadow: 2px 7px 9px 3px #1b191933;
+  background: white;
+  opacity: 85%
+}
+
+
+.body {
+  margin: 0 auto;
+  background-image: url("../../../assets/img/notification-backgroup-list.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%
+}
+
+
+hr {
+  border: none;
+  height: 20px;
+  width: 90%;
+  border-bottom: 2px solid #1f1209;
+  box-shadow: 0 20px 20px -20px #242323;
+  margin: -20px auto 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: center
+}
+
+.formRow_create_title{
+  text-align: center;
+  background-color: #198754;
+  border-radius: 7px;
+  color: white;
+}
+.form-text {
+  color: red;
+}
+h5{
+  font-size:2vw;
+  padding: 1% 0%;
+}

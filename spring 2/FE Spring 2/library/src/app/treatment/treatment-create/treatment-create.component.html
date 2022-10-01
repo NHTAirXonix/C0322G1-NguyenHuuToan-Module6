@@ -1,0 +1,90 @@
+<div class="body">
+  <div class="container-fluid">
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-6 formRow_create" [formGroup]="creatTreatmentForm" (ngSubmit)="submit()">
+        <div class="mb-3 formRow_create_title">
+          <h5><b>Nhập thông tin</b></h5>
+        </div>
+        <hr>
+        <div class="formRow_create_content">
+          <div class="mb-3">
+            <label class="form-label">Ngày <span class="text-danger">*</span> </label>
+            <input type="date" class="form-control" formControlName="date">
+            <div class="form-text">
+              <p *ngIf="creatTreatmentForm.controls.date.hasError('required') && (creatTreatmentForm.controls.date.touched || check)">Vui lòng nhập đúng ngày khám chữa bệnh.</p>
+              <p *ngIf="creatTreatmentForm.controls.date.hasError('dateNotExist') && creatTreatmentForm.controls.date.dirty"> {{ creatTreatmentForm.controls['date'].errors.message }}</p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Chuồng <span class="text-danger">*</span></label>
+            <select  class="form-control" formControlName="pigstyCode" (change)="getPigByPigstyId(creatTreatmentForm.value.pigstyCode.id)">
+              <option selected value="" disabled>---Chọn---</option>
+              <option *ngFor=" let item of listPigsty" [ngValue]="item">{{ item.code }}</option>
+            </select>
+            <div class="form-text">
+              <p *ngIf="creatTreatmentForm.controls.pigstyCode.hasError('required') && (creatTreatmentForm.controls.pigstyCode.touched || check )">Vui lòng chọn chuồng lợn.</p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mã lợn <span class="text-danger">*</span></label>
+            <select   class="form-control" formControlName="pig" >
+              <option selected value="" disabled>---Chọn---</option>
+              <option *ngFor=" let item of listPig" [ngValue]="item">{{ item.code }}</option>
+            </select>
+            <div class="form-text">
+              <p *ngIf="creatTreatmentForm.controls.pig.hasError('required') && ( creatTreatmentForm.controls.pig.touched  || check)">Vui lòng chọn mã lợn.</p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Người/ TT khám  <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="doctor" placeholder="Nhập tên người khám bệnh">
+            <div class="form-text">
+              <p *ngIf="creatTreatmentForm.controls.doctor.hasError('required') && (creatTreatmentForm.controls.doctor.touched || check)">Vui lòng nhập ngày khám chữa trị.</p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Loại bệnh <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="diseases" placeholder="Nhập tên bệnh" required>
+            <div class="form-text">
+              <p *ngIf="creatTreatmentForm.controls.diseases.hasError('required') && (creatTreatmentForm.controls.diseases.touched || check)">Không được để trống.</p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">Thuốc <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="medicine" placeholder="Nhập tên thuốc" required>
+                <div class="form-text">
+                  <p *ngIf="creatTreatmentForm.controls.medicine.hasError('required')&& (creatTreatmentForm.controls.medicine.touched || check)">Không được để trống.</p>
+                </div>                            </div>
+              <div class="col-6">
+                <label class="form-label">Số lượng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" formControlName="amount" required>
+                <div class="form-text">
+                  <p *ngIf="creatTreatmentForm.controls.amount.hasError('required') && (creatTreatmentForm.controls.amount.touched || check)">Không được để trống.</p>
+                  <p *ngIf="creatTreatmentForm.controls.amount.hasError('min') && (creatTreatmentForm.controls.amount.touched || check)">Không được nhập giá trị âm và 0.</p>
+                </div>                            </div>
+              <input type="number" class="form-control" formControlName="isDelete" hidden>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ghi chú:</label>
+            <textarea class="form-control" ></textarea>
+
+          </div>
+          <div class="button">
+            <button class="btn btn-outline-danger me-4" routerLink="/treatment"> Quay Lại</button>
+            <button class="btn btn-outline-success me-4" type="submit"> Thêm Mới </button>
+            <button class="btn btn-outline-secondary"  type="reset"> Nhập Lại </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+
+</div>

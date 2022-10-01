@@ -1,0 +1,65 @@
+<div class="body">
+  <div class="container">
+    <div class="row formRow">
+      <form class="col-lg-6 formRow_create">
+        <div class="mb-3 formRow_create_title">
+          <h2 class="hgu"><b>CHỈNH SỬA THÔNG BÁO</b></h2>
+        </div>
+        <form [formGroup]="notificationForm">
+          <hr>
+          <div class="formRow_create_content">
+            <div class="mb-3" style="text-align: left ;margin-bottom: 10px">
+              <label class="form-label"><strong>Hình ảnh</strong></label><label class="form-text"><strong>
+              *</strong></label>
+              <input class="form-control" type="file" multiple (change)="selectFile($event)"
+                     (change)="onFileSelected($event)">
+            </div>
+            <div class="col-md-8" style="height: 200px">
+              <img *ngIf="!editImageState" [src]="notificationForm.get('image').value" width="300" height="200">
+              <img class="preview-img rounded" [src]="url" *ngIf="editImageState" width="300" height="200">
+            </div>
+
+            <div style="color: red" *ngIf="regexImageUrl == true">Không hỗ trợ tệp ảnh này, vui lòng chọn ảnh lại.</div>
+
+            <div class="mb-3">
+              <label class="form-label"><strong>Tiêu đề </strong></label><label class="form-text">
+              <strong>*</strong></label>
+              <input type="text" formControlName="title" class="form-control">
+            </div>
+
+            <p style="color:red" *ngIf="notificationForm.controls.title.hasError('required') &&
+         notificationForm.controls.title.dirty">Vui lòng nhập tiêu đề.</p>
+            <p style="color:red" *ngIf="notificationForm.controls.title.hasError('maxlength') &&
+         notificationForm.controls.title.dirty">Tiêu đề quá dài.</p>
+
+            <div class="mb-3">
+              <label class="form-label"><strong>Nội dung</strong></label><label class="form-text">
+              <strong>*</strong></label>
+              <ckeditor (keydown.enter)="updateNotification()"
+                        [editor]="editor" formControlName="content">
+                <textarea class="form-control border-secondary input texarea " rows="4" id="content"></textarea>
+              </ckeditor>
+            </div>
+
+            <p style="color:red" *ngIf="notificationForm.controls.content.hasError('required') &&
+         notificationForm.controls.content.dirty">Vui lòng nhập nội dung.</p>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-around">
+              <button class="btn btn-outline-danger button " [routerLink]="['/notification/list']">Quay Lại</button>
+              <button type="submit" *ngIf="buttonNotification" style="height: 38px;width: 121px" (click)="updateNotification()"
+                      class="btn btn-outline-success" [disabled]="!notificationForm.valid"> Cập nhật
+              </button>
+              <button *ngIf="!buttonNotification" style="height: 38px;width: 121px"
+                      class="btn btn-outline-success disabled">
+                <div class="spinner-border spinner-border-sm "></div>
+                Đang tải ...
+              </button>
+              <button class="btn btn-outline-secondary" (click)="reset(id)">Nhập lại</button>
+            </div>
+          </div>
+        </form>
+      </form>
+    </div>
+  </div>
+  <div class="vc_empty_space" style="height: 64px"><span class="vc_empty_space_inner"></span></div>
+</div>

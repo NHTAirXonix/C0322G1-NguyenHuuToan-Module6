@@ -1,0 +1,73 @@
+.modal-buton {
+  font-family: arial, helvetica, sans-serif !important;
+  color: #fff !important;
+  background-color: #38761d !important;
+  transform: rotate(270deg);
+  position: fixed;
+  right: -20px;
+  top: 70%;
+  padding:10px 15px;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+}
+.modal-content {
+  margin-top: 15%;
+  background-color: #6ea262;
+  color: white;
+  padding: 0 25px;
+  min-width: 600px;
+  font-size: 18px;
+}
+
+.modal-header {
+  padding: 16px 0;
+}
+
+.row {
+  margin-bottom: 30px;
+}
+
+.modal-body textarea, .modal-body input {
+  border-radius: 2px;
+}
+
+.modal-body button {
+  background-color: #F1C232;
+  border-radius: 5px;
+  border: #F1C232 1px solid;
+  padding: 5px 20px;
+  color: white;
+  line-height: 42px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.erorr{
+  color: #B80000;
+}
+
+@media (max-width: 576px) {
+  .modal-content {
+    min-width: 100%;
+  }
+}
+.success-content{
+  background-color: #93b95e;
+
+}
+@media (max-width: 768px) {
+  .col-6,.col-12 {
+    width: 100%;
+    padding-bottom: 30px;
+  }
+  .col-1{
+    padding-bottom: 30px;
+  }
+  .row{
+    margin: 0;
+  }
+}

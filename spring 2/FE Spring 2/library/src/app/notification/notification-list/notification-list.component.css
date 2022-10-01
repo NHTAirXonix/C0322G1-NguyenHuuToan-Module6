@@ -1,0 +1,22 @@
+.body {
+  margin: 0 auto;
+  background-image: url('../../../assets/img/notification-backgroup-list.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.container-list {
+  background-color: white;
+  border-radius: 10px 10px 0 0 ;
+  padding: 20px;
+  opacity: 94%;
+}
+.tooLongContent {
+  height: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  }

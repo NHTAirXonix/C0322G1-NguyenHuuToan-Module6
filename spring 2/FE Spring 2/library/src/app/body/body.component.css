@@ -1,0 +1,104 @@
+.card {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: blue;
+  font-weight: bold;
+}
+
+.page-link:hover {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.ads {
+  width: 100%;
+  height: 100%;
+}
+
+.login {
+  margin-left: 5px;
+}
+
+.tooLongContent {
+  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+figure {
+  height: 90px;
+  position: relative;
+}
+
+figure:before,
+figure:after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  padding-bottom: 5px;
+}
+
+@media (max-width: 992px) {
+  .ads-body {
+    display: none;
+  }
+
+  figure {
+    height: 360px;
+    position: relative;
+  }
+
+  .btn-search {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .news-title {
+    font-weight: bolder;
+    text-align: center;
+    font-size: 32px;
+    font-family: "Raleway", sans-serif;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .selectOnMollibe {
+    padding-right: 5px;
+  }
+}
+
+.book {
+  background-color: unset;
+  height: 450px;
+  padding: 50px;
+}
+
+.book:hover {
+  padding: 40px;
+}

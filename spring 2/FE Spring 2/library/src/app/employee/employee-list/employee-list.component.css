@@ -1,0 +1,239 @@
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+#employees {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+}
+
+#employees {
+  background-image: url("../../../assets/img/notification-backgroup.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100% ;
+}
+
+a {
+  color: #1977cc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3291e6;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+h4:hover{
+  overflow: visible;
+}
+
+.employees-title{
+  font-weight: bolder;
+  text-align: center;
+  font-size: 32px;
+  font-family: "Raleway", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about .content h3 {
+  font-weight: 700;
+  font-size: 22px;
+  color: #555555;
+}
+
+.about .content ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.about .content ul {
+  padding-bottom: 10px;
+}
+
+.about .content li {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.about .content ul i {
+  font-size: 20px;
+  padding-right: 2px;
+  color: #34b7a7;
+}
+
+.about .content p:last-child {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Pagination
+--------------------------------------------------------------*/
+.pagination-employee{
+  height: 40px;
+  background-color: white;
+  border-radius:0 0 10px 10px;
+  opacity: 92%;
+  position: relative;
+}
+
+/*--------------------------------------------------------------
+# Employees
+--------------------------------------------------------------*/
+.employees {
+  background: #fff;
+  padding: 40px 45px 30px 45px;
+  border-radius: 10px 10px 0 0;
+  opacity: 92%;
+  min-height: 770px;
+}
+
+
+.employees .member {
+  position: relative;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  height: 255px;
+}
+
+.employees .member .pic {
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.employees .member .pic:hover i{
+  visibility: visible;
+}
+
+.employees .member .pic:hover img {
+  opacity: 0.6;
+}
+
+.employees .member .pic .detail{
+  color:  black;
+  font-size: 40px;
+  position: absolute;
+  right: 35%;
+  top:33%;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.employees .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+
+.employees .member:hover img {
+  transform: scale(1.2);
+}
+
+.employees .member .member-info {
+  padding-left: 20px;
+  width: 70%;
+}
+
+.employees .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #2c4964;
+}
+
+.employees .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+
+.employees .member span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b2c8dd;
+  bottom: 0;
+  left: 0;
+}
+
+.employees .member label{
+  font-size: 14px;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.employees .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employees .member .social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: 45px;
+  height: 40px;
+  background: #a0bcd5;
+  box-shadow: 0 2px 15px rgba(44, 73, 100, 0.1);
+
+}
+
+.employees .member .member-info i{
+  font-size: 14px;
+}
+
+.employees .member .social a i {
+  color: #fff;
+  font-size: 18px;
+  margin: 0 2px;
+}
+
+
+.employees .member .social .delete:hover {
+  background: #DC3545;
+  color: #fff;
+}
+
+.employees .member .social .edit:hover{
+  background: #FFC107;
+}
+
+.employees .member .social a+a {
+  margin-left: 8px;
+}
+

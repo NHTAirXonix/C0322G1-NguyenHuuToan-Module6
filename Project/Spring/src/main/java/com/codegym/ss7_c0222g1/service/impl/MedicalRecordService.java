@@ -49,8 +49,8 @@ public class MedicalRecordService implements IMedicalRecordService {
     }
 
     @Override
-    public List<MedicalRecord> search(String name) {
-        return medicalRecordRepository.searchC(name);
+    public List<MedicalRecord> search(String name, String patientId) {
+        return medicalRecordRepository.searchC(name, patientId);
     }
 
     @Override

@@ -8,6 +8,8 @@ public interface IMedicalRecordService {
 
     void removeById(Integer id);
 
+    void create(MedicalRecord medicalRecordNew);
+
     MedicalRecord findById(Integer id);
 
     void update(Integer medicalId,
@@ -17,9 +19,9 @@ public interface IMedicalRecordService {
                 String reason,
                 String resolve);
 
-    void create(MedicalRecord medicalRecordNew);
 
-    List<MedicalRecord> search(String name);
+
+    List<MedicalRecord> search(String name, String patientId);
 
     List<String[]> getChart();
 }

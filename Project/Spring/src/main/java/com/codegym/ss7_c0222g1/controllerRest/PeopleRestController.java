@@ -91,9 +91,12 @@ public class PeopleRestController {
         return new ResponseEntity<>(patientList, HttpStatus.OK);
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<?> search(@PathVariable("name") String name) {
-        List<MedicalRecord> medicalRecordList = medicalRecordService.search(name);
+    @GetMapping("/search/{name}/{patientId}")
+    public ResponseEntity<?> search(@PathVariable("name") String name, @PathVariable("patientId") String patientId) {
+        if (name.equals("all")) {
+            name = "";
+        }
+        List<MedicalRecord> medicalRecordList = medicalRecordService.search(name,patientId);
         if(medicalRecordList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
